@@ -4,48 +4,48 @@ const photos = [
   {
     year: "2020",
     age: "10 anos",
-    text: "O começo de tudo. Aquela energia de criança que nunca vai embora.",
+    text: "Onde a história começa a ganhar forma.",
     img: "photos/ano1.jpg",
   },
   {
     year: "2021",
     age: "11 anos",
-    text: "Descobrindo novas paixões e fazendo amizades que ficaram pra vida.",
+    text: "Novas descobertas e amizades que permaneceram.",
     img: "photos/ano2.jpg",
   },
   {
     year: "2022",
     age: "12 anos",
-    text: "Crescendo, aprontando e colecionando histórias pra contar.",
+    text: "Um ano de crescimento e de novas conquistas.",
     img: "photos/ano3.jpg",
   },
   {
     year: "2023",
     age: "13 anos",
-    text: "A fase das grandes aventuras e das risadas que não acabam mais.",
+    text: "Mais maturidade, mais objetivos, mais determinação.",
     img: "photos/ano4.jpg",
   },
   {
     year: "2024",
     age: "14 anos",
-    text: "Mais confiança, mais estilo e sonhos cada vez maiores.",
+    text: "Confiança e identidade cada vez mais definidas.",
     img: "photos/ano5.jpg",
   },
   {
     year: "2025",
     age: "15 anos",
-    text: "Pronto para o próximo grande capítulo: os 16 anos!",
+    text: "O último passo antes de um novo capítulo.",
     img: "photos/ano6.jpg",
   },
 ];
 
 const achievements = [
-  { icon: "🏆", title: "Superação", text: "Enfrentou desafios de cabeça erguida e sempre deu a volta por cima." },
-  { icon: "⚽", title: "Esporte", text: "Suor, garra e muita paixão em cada partida jogada." },
-  { icon: "🎓", title: "Estudos", text: "Dedicação nos estudos construindo um futuro brilhante." },
-  { icon: "🎮", title: "Diversão", text: "Mestre nas partidas e nas resenhas com a galera." },
-  { icon: "🤝", title: "Amizade", text: "Um amigo leal, presente e daqueles que a gente não larga." },
-  { icon: "🎯", title: "Novos Sonhos", text: "Metas grandes pela frente e toda a energia pra alcançá-las." },
+  { title: "Superação", text: "Enfrentou cada desafio com resiliência e determinação." },
+  { title: "Esporte", text: "Disciplina e dedicação dentro e fora de campo." },
+  { title: "Estudos", text: "Comprometimento constante na construção do futuro." },
+  { title: "Amizade", text: "Lealdade e presença em todos os momentos." },
+  { title: "Caráter", text: "Integridade e respeito como marcas registradas." },
+  { title: "Novos Objetivos", text: "Metas ambiciosas e a garra para alcançá-las." },
 ];
 
 // ---------- ÁUDIO CINEMATOGRÁFICO (Web Audio API - sem arquivos) ----------
@@ -187,9 +187,10 @@ function buildContent() {
   const ach = document.getElementById("achievements");
   ach.innerHTML = achievements
     .map(
-      (a) => `
+      (a, i) => `
       <div class="ach-card">
-        <div class="ach-icon">${a.icon}</div>
+        <span class="ach-num">${String(i + 1).padStart(2, "0")}</span>
+        <span class="ach-rule"></span>
         <h3 class="ach-title">${a.title}</h3>
         <p class="ach-text">${a.text}</p>
       </div>`
