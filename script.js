@@ -1,824 +1,265 @@
-/*=========================================================
-    RENZO 16 ANOS
-    SCRIPT.JS - PARTE 1
-=========================================================*/
+// ========== DADOS (edite aqui para personalizar) ==========
+// 3 abas de fotos. Coloque as imagens reais em photos/ com os nomes indicados.
+const photoTabs = [
+  {
+    id: "destaques",
+    label: "Destaques",
+    items: [
+      { title: "2020", sub: "10 anos", img: "photos/ano1.jpg" },
+      { title: "2021", sub: "11 anos", img: "photos/ano2.jpg" },
+      { title: "2022", sub: "12 anos", img: "photos/ano3.jpg" },
+      { title: "2023", sub: "13 anos", img: "photos/ano4.jpg" },
+      { title: "2024", sub: "14 anos", img: "photos/ano5.jpg" },
+      { title: "2025", sub: "15 anos", img: "photos/ano6.jpg" },
+    ],
+  },
+  {
+    id: "aventuras",
+    label: "Aventuras",
+    items: [
+      { title: "Viagens", sub: "Novos lugares", img: "photos/aventura1.jpg" },
+      { title: "Esporte", sub: "Em campo", img: "photos/aventura2.jpg" },
+      { title: "Praia", sub: "Verão", img: "photos/aventura3.jpg" },
+      { title: "Shows", sub: "Boas vibes", img: "photos/aventura4.jpg" },
+      { title: "Trilhas", sub: "Natureza", img: "photos/aventura5.jpg" },
+      { title: "Games", sub: "Diversão", img: "photos/aventura6.jpg" },
+    ],
+  },
+  {
+    id: "amigos",
+    label: "Amigos & Família",
+    items: [
+      { title: "Família", sub: "Sempre juntos", img: "photos/amigos1.jpg" },
+      { title: "Amigos", sub: "A galera", img: "photos/amigos2.jpg" },
+      { title: "Festas", sub: "Momentos", img: "photos/amigos3.jpg" },
+      { title: "Resenha", sub: "Risadas", img: "photos/amigos4.jpg" },
+      { title: "Escola", sub: "Companheiros", img: "photos/amigos5.jpg" },
+      { title: "Sempre", sub: "Do lado", img: "photos/amigos6.jpg" },
+    ],
+  },
+];
 
-"use strict";
+const achievements = [
+  { title: "Superação", text: "Enfrentou cada desafio com resiliência e determinação." },
+  { title: "Esporte", text: "Disciplina e dedicação dentro e fora de campo." },
+  { title: "Estudos", text: "Comprometimento constante na construção do futuro." },
+  { title: "Amizade", text: "Lealdade e presença em todos os momentos." },
+  { title: "Caráter", text: "Integridade e respeito como marcas registradas." },
+  { title: "Novos Objetivos", text: "Metas ambiciosas e a garra para alcançá-las." },
+];
 
-/*=========================================================
-                ELEMENTOS
-=========================================================*/
+// ========== ÁUDIO (Web Audio API, sem arquivos) ==========
+let audioCtx = null;
+let soundOn = true;
 
-const countdown = document.querySelector(".countdown");
-const countNumber = document.querySelector(".count-number");
-
-const hero = document.querySelector(".hero");
-
-const startButton = document.querySelector(".start-btn");
-
-const video = document.querySelector("video");
-
-const overlay = document.querySelector(".video-overlay");
-
-const progressBar = document.querySelector(".video-progress span");
-
-const finalScreen = document.querySelector(".final-screen");
-
-const restartButton = document.querySelector(".restart");
-
-/*=========================================================
-            CONFIGURAÇÕES
-=========================================================*/
-
-const COUNTDOWN_TIME = 5;
-
-let countdownValue = COUNTDOWN_TIME;
-
-let started = false;
-
-/*=========================================================
-            CONTAGEM REGRESSIVA
-=========================================================*/
-
-function startCountdown(){
-
-    countNumber.textContent = countdownValue;
-
-    const timer = setInterval(()=>{
-
-        countdownValue--;
-
-        if(countdownValue > 0){
-
-            countNumber.textContent = countdownValue;
-
-        }
-
-        if(countdownValue === 0){
-
-            countNumber.textContent = "🎉";
-
-            clearInterval(timer);
-
-            launchConfetti();
-
-            setTimeout(hideCountdown,1000);
-
-        }
-
-    },1000);
-
+function initAudio() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+}
+function playBeep(freq = 440, duration = 0.15, type = "sine", vol = 0.2) {
+  if (!audioCtx || !soundOn) return;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = type;
+  osc.frequency.value = freq;
+  gain.gain.setValueAtTime(0, audioCtx.currentTime);
+  gain.gain.linearRampToValueAtTime(vol, audioCtx.currentTime + 0.01);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start();
+  osc.stop(audioCtx.currentTime + duration);
+}
+// "Tudum" estilo Netflix: dois toques graves
+function playTudum() {
+  if (!audioCtx || !soundOn) return;
+  playBeep(73.42, 0.22, "sine", 0.35);
+  setTimeout(() => playBeep(98.0, 0.5, "sine", 0.35), 180);
 }
 
-function hideCountdown(){
+// ========== ELEMENTOS ==========
+const startScreen = document.getElementById("startScreen");
+const startBtn = document.getElementById("startBtn");
+const countdown = document.getElementById("countdown");
+const countNumber = document.getElementById("countNumber");
+const ringProgress = document.getElementById("ringProgress");
+const reveal = document.getElementById("reveal");
+const app = document.getElementById("app");
+const navbar = document.getElementById("navbar");
+const soundToggle = document.getElementById("soundToggle");
+const replayBtn = document.getElementById("replayBtn");
 
-    countdown.style.opacity="0";
+const RING_LEN = 2 * Math.PI * 54;
 
-    countdown.style.pointerEvents="none";
+// ========== CONTAGEM REGRESSIVA ==========
+function runCountdown() {
+  let n = 5;
+  const total = 5;
+  countNumber.textContent = n;
+  countNumber.classList.add("pop");
+  ringProgress.style.strokeDashoffset = 0;
+  playBeep(500, 0.15, "sine", 0.25);
 
-    setTimeout(()=>{
-
-        countdown.style.display="none";
-
-    },900);
-
-}
-
-/*=========================================================
-            CONFETES
-=========================================================*/
-
-function launchConfetti(){
-
-    if(typeof confetti !== "function") return;
-
-    confetti({
-
-        particleCount:200,
-
-        spread:160,
-
-        origin:{y:.65}
-
-    });
-
-}
-
-/*=========================================================
-            COMEÇAR HISTÓRIA
-=========================================================*/
-
-function startMovie(){
-
-    if(started) return;
-
-    started=true;
-
-    hero.style.transition=".8s";
-
-    hero.style.opacity="0";
-
-    hero.style.transform="translate(-50%,-60%)";
-
-    setTimeout(()=>{
-
-        hero.style.display="none";
-
-    },800);
-
-    video.muted=false;
-
-    video.play();
-
-}
-
-startButton?.addEventListener("click",startMovie);
-
-/*=========================================================
-        PROGRESSO DO VÍDEO
-=========================================================*/
-
-video?.addEventListener("timeupdate",()=>{
-
-    const progress =
-        (video.currentTime/video.duration)*100;
-
-    if(progressBar){
-
-        progressBar.style.width = progress+"%";
-
+  const timer = setInterval(() => {
+    n--;
+    if (n <= 0) {
+      clearInterval(timer);
+      showReveal();
+      return;
     }
-
-});
-
-/*=========================================================
-            FIM DO VÍDEO
-=========================================================*/
-
-video?.addEventListener("ended",()=>{
-
-    launchConfetti();
-
-    finalScreen.classList.add("active");
-
-});
-
-/*=========================================================
-            RECOMEÇAR
-=========================================================*/
-
-restartButton?.addEventListener("click",()=>{
-
-    location.reload();
-
-});
-
-/*=========================================================
-            TECLADO
-=========================================================*/
-
-document.addEventListener("keydown",(e)=>{
-
-    switch(e.code){
-
-        case "Space":
-
-            e.preventDefault();
-
-            if(video.paused){
-
-                video.play();
-
-            }else{
-
-                video.pause();
-
-            }
-
-        break;
-
-        case "ArrowRight":
-
-            video.currentTime += 5;
-
-        break;
-
-        case "ArrowLeft":
-
-            video.currentTime -= 5;
-
-        break;
-
-        case "KeyF":
-
-            if(!document.fullscreenElement){
-
-                document.documentElement.requestFullscreen();
-
-            }else{
-
-                document.exitFullscreen();
-
-            }
-
-        break;
-
-    }
-
-});
-
-/*=========================================================
-            VOLUME
-=========================================================*/
-
-document.addEventListener("wheel",(e)=>{
-
-    if(e.deltaY<0){
-
-        video.volume=Math.min(video.volume+.05,1);
-
-    }else{
-
-        video.volume=Math.max(video.volume-.05,0);
-
-    }
-
-});
-
-/*=========================================================
-            MÚSICA (OPCIONAL)
-=========================================================*/
-
-// const music = new Audio("audio/musica.mp3");
-// music.loop = true;
-// music.volume = .3;
-
-/*=========================================================
-            INICIAR
-=========================================================*/
-
-window.addEventListener("load",()=>{
-
-    startCountdown();
-
-});
-
-console.log("RENZO 16 ANOS - Parte 1 carregada.");
-/*=========================================================
-                CARROSSEL PREMIUM
-=========================================================*/
-
-const carousel = document.querySelector(".carousel");
-const track = document.querySelector(".carousel-track");
-
-const leftArrow = document.querySelector(".carousel-arrow.left");
-const rightArrow = document.querySelector(".carousel-arrow.right");
-
-let isDragging = false;
-let startX = 0;
-let currentTranslate = 0;
-let previousTranslate = 0;
-let animationID;
-
-const AUTO_SPEED = 0.6;
-
-let autoMove = true;
-
-/*=========================================================
-            DUPLICA AS FOTOS
-=========================================================*/
-
-function duplicateItems(){
-
-    if(!track) return;
-
-    const items = [...track.children];
-
-    items.forEach(item=>{
-
-        const clone = item.cloneNode(true);
-
-        track.appendChild(clone);
-
-    });
-
+    countNumber.textContent = n;
+    countNumber.classList.remove("pop");
+    void countNumber.offsetWidth;
+    countNumber.classList.add("pop");
+    ringProgress.style.strokeDashoffset = RING_LEN * ((total - n) / total);
+    playBeep(n === 1 ? 800 : 500, 0.15, "sine", 0.25);
+  }, 1000);
 }
 
-duplicateItems();
-
-/*=========================================================
-            LOOP AUTOMÁTICO
-=========================================================*/
-
-function autoCarousel(){
-
-    if(!autoMove) return;
-
-    currentTranslate -= AUTO_SPEED;
-
-    const limit = track.scrollWidth/2;
-
-    if(Math.abs(currentTranslate)>=limit){
-
-        currentTranslate=0;
-
-    }
-
-    track.style.transform=`translateX(${currentTranslate}px)`;
-
-    animationID=requestAnimationFrame(autoCarousel);
-
+// ========== TRANSIÇÕES ==========
+function showReveal() {
+  countdown.classList.add("hidden");
+  reveal.classList.remove("hidden");
+  playTudum();
+  setTimeout(showApp, 2600);
+}
+function showApp() {
+  reveal.classList.add("hidden");
+  app.classList.remove("hidden");
+  window.scrollTo({ top: 0 });
+  buildApp();
 }
 
-requestAnimationFrame(autoCarousel);
-
-/*=========================================================
-                PAUSAR
-=========================================================*/
-
-carousel?.addEventListener("mouseenter",()=>{
-
-    autoMove=false;
-
-});
-
-carousel?.addEventListener("mouseleave",()=>{
-
-    autoMove=true;
-
-    cancelAnimationFrame(animationID);
-
-    requestAnimationFrame(autoCarousel);
-
-});
-
-/*=========================================================
-            BOTÕES
-=========================================================*/
-
-leftArrow?.addEventListener("click",()=>{
-
-    currentTranslate+=350;
-
-    track.style.transition=".4s";
-
-    track.style.transform=`translateX(${currentTranslate}px)`;
-
-});
-
-rightArrow?.addEventListener("click",()=>{
-
-    currentTranslate-=350;
-
-    track.style.transition=".4s";
-
-    track.style.transform=`translateX(${currentTranslate}px)`;
-
-});
-
-track?.addEventListener("transitionend",()=>{
-
-    track.style.transition="none";
-
-});
-
-/*=========================================================
-                DRAG
-=========================================================*/
-
-carousel?.addEventListener("mousedown",dragStart);
-carousel?.addEventListener("mouseup",dragEnd);
-carousel?.addEventListener("mouseleave",dragEnd);
-carousel?.addEventListener("mousemove",dragMove);
-
-function dragStart(e){
-
-    isDragging=true;
-
-    autoMove=false;
-
-    startX=e.pageX;
-
-    previousTranslate=currentTranslate;
-
+// ========== CONSTRUÇÃO DO APP ==========
+let appBuilt = false;
+function buildApp() {
+  if (appBuilt) return;
+  appBuilt = true;
+  buildPhotoTabs();
+  renderPhotoRow(photoTabs[0]);
+  buildAchievements();
 }
 
-function dragMove(e){
-
-    if(!isDragging) return;
-
-    const current=e.pageX;
-
-    const diff=current-startX;
-
-    currentTranslate=previousTranslate+diff;
-
-    track.style.transform=`translateX(${currentTranslate}px)`;
-
+function cardHTML(it) {
+  return `
+    <div class="card" data-label="${it.title}">
+      <img src="${it.img}" alt="${it.title}" loading="lazy"
+           onerror="this.closest('.card').classList.add('no-img'); this.remove();" />
+      <div class="card-info">
+        <span class="card-title">${it.title}</span>
+        <span class="card-sub">${it.sub}</span>
+      </div>
+    </div>`;
 }
 
-function dragEnd(){
+function buildPhotoTabs() {
+  const tabs = document.getElementById("photoTabs");
+  tabs.innerHTML = photoTabs
+    .map(
+      (t, i) =>
+        `<button class="tab-btn ${i === 0 ? "active" : ""}" data-id="${t.id}">${t.label}</button>`
+    )
+    .join("");
 
-    isDragging=false;
-
-    autoMove=true;
-
+  tabs.querySelectorAll(".tab-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      tabs.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      const tab = photoTabs.find((t) => t.id === btn.dataset.id);
+      renderPhotoRow(tab);
+      playBeep(600, 0.08, "sine", 0.12);
+    });
+  });
 }
 
-/*=========================================================
-                TOUCH
-=========================================================*/
-
-carousel?.addEventListener("touchstart",(e)=>{
-
-    isDragging=true;
-
-    autoMove=false;
-
-    startX=e.touches[0].clientX;
-
-    previousTranslate=currentTranslate;
-
-});
-
-carousel?.addEventListener("touchmove",(e)=>{
-
-    if(!isDragging) return;
-
-    const current=e.touches[0].clientX;
-
-    const diff=current-startX;
-
-    currentTranslate=previousTranslate+diff;
-
-    track.style.transform=`translateX(${currentTranslate}px)`;
-
-});
-
-carousel?.addEventListener("touchend",()=>{
-
-    isDragging=false;
-
-    autoMove=true;
-
-});
-
-/*=========================================================
-            CLIQUE NAS FOTOS
-=========================================================*/
-
-document.querySelectorAll(".photo img").forEach(img=>{
-
-    img.addEventListener("click",()=>{
-
-        const modal=document.querySelector(".modal");
-
-        const modalImg=document.querySelector(".modal-content img");
-
-        modal.classList.add("active");
-
-        modalImg.src=img.src;
-
-        video.pause();
-
-    });
-
-});
-
-/*=========================================================
-            FECHAR MODAL
-=========================================================*/
-
-document.querySelector(".modal-close")?.addEventListener("click",()=>{
-
-    document.querySelector(".modal").classList.remove("active");
-
-    video.play();
-
-});
-
-document.querySelector(".modal")?.addEventListener("click",(e)=>{
-
-    if(e.target.classList.contains("modal")){
-
-        document.querySelector(".modal").classList.remove("active");
-
-        video.play();
-
-    }
-
-});
-
-/*=========================================================
-            ESC
-=========================================================*/
-
-document.addEventListener("keydown",(e)=>{
-
-    if(e.key==="Escape"){
-
-        document.querySelector(".modal")?.classList.remove("active");
-
-        video.play();
-
-    }
-
-});
-
-/*=========================================================
-            HOVER NAS FOTOS
-=========================================================*/
-
-document.querySelectorAll(".photo").forEach(card=>{
-
-    card.addEventListener("mouseenter",()=>{
-
-        autoMove=false;
-
-    });
-
-    card.addEventListener("mouseleave",()=>{
-
-        autoMove=true;
-
-    });
-
-});
-
-console.log("Carrossel carregado!");
-/*=========================================================
-            PAINÉIS PREMIUM
-=========================================================*/
-
-const panels = document.querySelectorAll(".panel");
-const menuCards = document.querySelectorAll(".menu-card");
-const closeButtons = document.querySelectorAll(".close-panel");
-
-/*=========================================================
-            ABRIR PAINEL
-=========================================================*/
-
-function openPanel(id){
-
-    const panel = document.getElementById(id);
-
-    if(!panel) return;
-
-    video.pause();
-
-    panel.style.display = "flex";
-
-    setTimeout(()=>{
-
-        panel.classList.add("active");
-
-    },20);
-
+function renderPhotoRow(tab) {
+  const row = document.getElementById("photoRow");
+  row.innerHTML = tab.items.map(cardHTML).join("");
+  row.classList.remove("fade-swap");
+  void row.offsetWidth;
+  row.classList.add("fade-swap");
+  row.scrollLeft = 0;
 }
 
-/*=========================================================
-            FECHAR PAINEL
-=========================================================*/
-
-function closePanel(panel){
-
-    panel.classList.remove("active");
-
-    setTimeout(()=>{
-
-        panel.style.display="none";
-
-        if(started){
-
-            video.play();
-
-        }
-
-    },400);
-
+function buildAchievements() {
+  const row = document.getElementById("achRow");
+  row.innerHTML = achievements
+    .map(
+      (a, i) => `
+      <div class="card ach">
+        <span class="ach-num">${String(i + 1).padStart(2, "0")}</span>
+        <h3 class="ach-title">${a.title}</h3>
+        <p class="ach-text">${a.text}</p>
+      </div>`
+    )
+    .join("");
 }
 
-/*=========================================================
-        MENU
-=========================================================*/
-
-menuCards.forEach(card=>{
-
-    card.addEventListener("click",()=>{
-
-        const panelName = card.dataset.panel;
-
-        openPanel(panelName);
-
-    });
-
+// ========== NAVBAR: scroll + navegação ==========
+window.addEventListener("scroll", () => {
+  if (!app.classList.contains("hidden")) {
+    navbar.classList.toggle("scrolled", window.scrollY > 40);
+  }
 });
 
-/*=========================================================
-        BOTÕES FECHAR
-=========================================================*/
-
-closeButtons.forEach(btn=>{
-
-    btn.addEventListener("click",()=>{
-
-        closePanel(btn.closest(".panel"));
-
-    });
-
+document.querySelectorAll("[data-target]").forEach((el) => {
+  el.addEventListener("click", () => {
+    const target = document.getElementById(el.dataset.target);
+    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 });
 
-/*=========================================================
-        CLICOU FORA
-=========================================================*/
-
-panels.forEach(panel=>{
-
-    panel.addEventListener("click",(e)=>{
-
-        if(e.target===panel){
-
-            closePanel(panel);
-
-        }
-
-    });
-
-});
-
-/*=========================================================
-            ESC
-=========================================================*/
-
-document.addEventListener("keydown",(e)=>{
-
-    if(e.key==="Escape"){
-
-        panels.forEach(panel=>{
-
-            if(panel.classList.contains("active")){
-
-                closePanel(panel);
-
-            }
-
+// destaca link ativo conforme a seção visível
+const sections = ["banner", "fotos", "conquistas", "mensagem"];
+const navObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        document.querySelectorAll(".nav-links li").forEach((li) => {
+          li.classList.toggle("active", li.dataset.target === e.target.id);
         });
-
-    }
-
+      }
+    });
+  },
+  { threshold: 0.5 }
+);
+window.addEventListener("load", () => {
+  sections.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) navObserver.observe(el);
+  });
 });
 
-/*=========================================================
-        ANIMAÇÃO DOS CARDS
-=========================================================*/
-
-menuCards.forEach((card,index)=>{
-
-    card.style.opacity="0";
-    card.style.transform="translateY(40px)";
-
-    setTimeout(()=>{
-
-        card.style.transition=".6s ease";
-
-        card.style.opacity="1";
-        card.style.transform="translateY(0px)";
-
-    },120*index);
-
+// ========== SETAS DOS CARROSSÉIS ==========
+document.querySelectorAll(".row-arrow").forEach((arrow) => {
+  arrow.addEventListener("click", () => {
+    const row = document.getElementById(arrow.dataset.row);
+    const amount = row.clientWidth * 0.8;
+    row.scrollBy({ left: arrow.classList.contains("left") ? -amount : amount, behavior: "smooth" });
+  });
 });
 
-/*=========================================================
-        EFEITO 3D
-=========================================================*/
-
-menuCards.forEach(card=>{
-
-    card.addEventListener("mousemove",(e)=>{
-
-        const rect = card.getBoundingClientRect();
-
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        const rotateY = ((x/rect.width)-0.5)*18;
-        const rotateX = ((y/rect.height)-0.5)*-18;
-
-        card.style.transform=
-        `perspective(900px)
-        rotateX(${rotateX}deg)
-        rotateY(${rotateY}deg)
-        translateY(-8px)
-        scale(1.04)`;
-
-    });
-
-    card.addEventListener("mouseleave",()=>{
-
-        card.style.transform="perspective(900px) rotateX(0deg) rotateY(0deg)";
-
-    });
-
+// ========== EVENTOS PRINCIPAIS ==========
+startBtn.addEventListener("click", () => {
+  initAudio();
+  if (audioCtx.state === "suspended") audioCtx.resume();
+  startScreen.classList.add("hidden");
+  countdown.classList.remove("hidden");
+  runCountdown();
 });
 
-/*=========================================================
-            CONTADOR DE FOTOS
-=========================================================*/
-
-const totalPhotos = document.querySelectorAll(".photo").length;
-
-const photoCounter = document.querySelector("#photoCounter");
-
-if(photoCounter){
-
-    photoCounter.innerHTML = totalPhotos;
-
-}
-
-/*=========================================================
-        SLIDESHOW AUTOMÁTICO
-=========================================================*/
-
-let slideShow = null;
-
-function startSlideshow(){
-
-    const images = document.querySelectorAll(".photo img");
-
-    let current = 0;
-
-    slideShow = setInterval(()=>{
-
-        images[current].click();
-
-        current++;
-
-        if(current>=images.length){
-
-            current=0;
-
-        }
-
-    },5000);
-
-}
-
-function stopSlideshow(){
-
-    clearInterval(slideShow);
-
-}
-
-/*=========================================================
-            TOOLTIP
-=========================================================*/
-
-document.querySelectorAll("[data-tooltip]").forEach(item=>{
-
-    item.addEventListener("mouseenter",()=>{
-
-        const tooltip = document.createElement("div");
-
-        tooltip.className="tooltip";
-
-        tooltip.innerHTML=item.dataset.tooltip;
-
-        document.body.appendChild(tooltip);
-
-        const rect=item.getBoundingClientRect();
-
-        tooltip.style.left=rect.left+"px";
-
-        tooltip.style.top=(rect.top-40)+"px";
-
-        item.tooltip=tooltip;
-
-    });
-
-    item.addEventListener("mouseleave",()=>{
-
-        if(item.tooltip){
-
-            item.tooltip.remove();
-
-        }
-
-    });
-
+soundToggle.addEventListener("click", () => {
+  soundOn = !soundOn;
+  soundToggle.classList.toggle("muted", !soundOn);
+  soundToggle.querySelector(".sound-icon").textContent = soundOn ? "♪" : "✕";
+  if (soundOn) initAudio();
 });
 
-/*=========================================================
-        MENSAGEM FINAL
-=========================================================*/
-
-function showFinalMessage(){
-
-    finalScreen.classList.add("active");
-
-    launchConfetti();
-
-}
-
-video.addEventListener("ended",showFinalMessage);
-
-console.log("Painéis Premium carregados!");
+replayBtn.addEventListener("click", () => {
+  app.classList.add("hidden");
+  reveal.classList.add("hidden");
+  countdown.classList.remove("hidden");
+  window.scrollTo({ top: 0 });
+  initAudio();
+  if (audioCtx.state === "suspended") audioCtx.resume();
+  runCountdown();
+});

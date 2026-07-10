@@ -1,414 +1,483 @@
-/*=============================
-        RESET
-=============================*/
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+:root {
+  --bg: #070b16;
+  --red: #2e7bff;
+  --red-dark: #1b4fd8;
+  --gold: #5ad0ff;
+  --gold-soft: rgba(90, 208, 255, 0.5);
+  --text: #ffffff;
+  --muted: #9fb0cc;
+  --card: #16213a;
+  --serif: "Cormorant Garamond", Georgia, serif;
 }
 
-html{
-    scroll-behavior:smooth;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background:
+    radial-gradient(ellipse 90% 60% at 15% 0%, rgba(24, 49, 100, 0.5) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 90% 100%, rgba(16, 40, 90, 0.4) 0%, transparent 60%),
+    var(--bg);
+  color: var(--text);
+  font-family: "Montserrat", sans-serif;
+  overflow-x: hidden;
 }
 
-body{
+.hidden { display: none !important; }
 
-    font-family:'Poppins',sans-serif;
-
-    width:100%;
-
-    height:100vh;
-
-    overflow:hidden;
-
-    color:white;
-
-    background:#050505;
-
+.netflix-logo {
+  font-family: "Bebas Neue", sans-serif;
+  background: linear-gradient(180deg, #b8dcff 0%, #4f9bff 55%, #1f5fe0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 2px;
+  filter: drop-shadow(0 0 26px rgba(46, 123, 255, 0.55));
 }
 
-/*=============================
-        BACKGROUND
-=============================*/
-
-.background{
-
-    position:fixed;
-
-    inset:0;
-
-    background:
-
-    radial-gradient(circle at top,#222 0%,#111 35%,#000 100%);
-
-    z-index:-3;
-
+/* ---------- SCREENS ---------- */
+.screen {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 42%, rgba(20, 45, 100, 0.45) 0%, transparent 65%),
+    #02040a;
 }
 
-/*=============================
-        OVERLAY
-=============================*/
+/* ---------- SOUND TOGGLE ---------- */
+.sound-toggle {
+  position: fixed;
+  top: 16px;
+  right: 18px;
+  z-index: 200;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 17px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: transform 0.25s, border-color 0.25s;
+}
+.sound-toggle:hover { transform: scale(1.1); border-color: var(--gold); }
+.sound-toggle.muted { opacity: 0.5; }
 
-.overlay{
+/* ---------- START ---------- */
+.start-inner { animation: fadeIn 1s ease both; }
+.start-logo { font-size: clamp(3.5rem, 14vw, 9rem); animation: glowPulse 3.5s ease-in-out infinite; }
+@keyframes glowPulse {
+  0%, 100% { filter: drop-shadow(0 0 18px rgba(46, 123, 255, 0.4)); }
+  50% { filter: drop-shadow(0 0 40px rgba(90, 208, 255, 0.75)); }
+}
+.start-sub {
+  font-family: "Bebas Neue";
+  letter-spacing: 14px;
+  text-indent: 14px;
+  font-size: clamp(1.1rem, 3vw, 1.8rem);
+  color: var(--gold);
+  margin: -0.3rem 0 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+}
+.rule {
+  display: inline-block;
+  width: clamp(32px, 8vw, 70px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
+}
+.start-hint { margin-top: 1.4rem; color: #8a8a8a; font-size: 0.74rem; letter-spacing: 2px; text-transform: uppercase; }
 
-    position:fixed;
+/* ---------- BOTÕES NETFLIX ---------- */
+.nf-btn {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.5px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  padding: 0.8rem 2.1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.nf-btn-play {
+  background: #fff;
+  color: #000;
+}
+.nf-btn-play:hover { background: #e6e6e6; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+.nf-btn-info {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #fff;
+}
+.nf-btn-info:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
 
-    inset:0;
+/* ---------- COUNTDOWN ---------- */
+.count-ring { position: relative; width: 240px; height: 240px; margin: 0 auto; }
+.count-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring-bg { fill: none; stroke: rgba(255, 255, 255, 0.1); stroke-width: 3; }
+.ring-progress {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 339.29;
+  stroke-dashoffset: 0;
+  filter: drop-shadow(0 0 10px rgba(90, 208, 255, 0.85));
+  transition: stroke-dashoffset 1s linear;
+}
+.count-number {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Bebas Neue";
+  font-size: 7.5rem;
+  color: #fff;
+}
+.count-number.pop { animation: pop 1s ease; }
+@keyframes pop {
+  0% { transform: scale(2.4); opacity: 0; filter: blur(8px); }
+  40% { transform: scale(1); opacity: 1; filter: blur(0); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.count-label { margin-top: 2.2rem; letter-spacing: 7px; text-indent: 7px; font-size: 0.72rem; color: #8a8a8a; text-transform: uppercase; }
 
-    background:
-
-    linear-gradient(to top,#000,transparent 40%),
-    linear-gradient(to bottom,#000,transparent 30%);
-
-    z-index:-2;
-
+/* ---------- REVEAL (tudum) ---------- */
+.reveal-name {
+  font-size: clamp(4rem, 20vw, 15rem);
+  animation: tudum 1.6s cubic-bezier(.2,.8,.2,1) forwards;
+}
+@keyframes tudum {
+  0% { opacity: 0; transform: scale(1.6); letter-spacing: 30px; filter: blur(12px); }
+  55% { opacity: 1; transform: scale(1); letter-spacing: 2px; filter: blur(0); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.reveal-kicker {
+  font-family: "Bebas Neue";
+  letter-spacing: 8px;
+  text-indent: 8px;
+  font-size: clamp(1rem, 3vw, 1.6rem);
+  color: var(--gold);
+  opacity: 0;
+  animation: fadeIn 1s ease 1.4s forwards;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
 }
 
-/*=============================
-        HERO
-=============================*/
+/* ---------- APP / NAVBAR ---------- */
+.app { animation: fadeIn 0.8s ease both; }
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  padding: 1rem 4vw;
+  transition: background 0.4s ease;
+  background: linear-gradient(180deg, rgba(0,0,0,0.85), transparent);
+}
+.navbar.scrolled { background: rgba(7, 11, 22, 0.92); backdrop-filter: blur(10px); box-shadow: 0 2px 16px rgba(0,0,0,0.6), 0 1px 0 rgba(90,208,255,0.12); }
+.nav-left { display: flex; align-items: center; gap: 2.5rem; }
+.nav-logo { font-size: 2rem; }
+.nav-links { display: flex; gap: 1.5rem; list-style: none; }
+.nav-links li {
+  color: var(--muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.nav-links li:hover, .nav-links li.active { color: #fff; }
 
-.hero{
+/* ---------- BANNER ---------- */
+.banner {
+  position: relative;
+  height: 90vh;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  padding: 0 4vw;
+  background: linear-gradient(90deg, rgba(7,11,22,0.92) 0%, rgba(7,11,22,0.35) 60%, transparent 100%),
+              url("photos/hero.jpg") center/cover no-repeat;
+}
+.banner-fade-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(0deg, var(--bg) 0%, transparent 100%);
+}
+.banner-content { position: relative; z-index: 2; max-width: 640px; }
+.banner-badge {
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 5px;
+  font-size: 0.78rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+.banner-badge::before {
+  content: "";
+  width: 44px;
+  height: 1px;
+  background: var(--gold-soft);
+}
+.banner-title {
+  font-family: "Bebas Neue";
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  letter-spacing: 2px;
+  line-height: 0.95;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.7);
+}
+.banner-meta { color: #d8d8d8; font-size: 0.92rem; margin: 1rem 0 1.1rem; letter-spacing: 0.5px; }
+.banner-meta .rank { color: var(--gold); font-weight: 600; }
+.dot { color: rgba(255,255,255,0.35); margin: 0 0.55rem; }
+.banner-desc {
+  color: #e5e5e5;
+  font-weight: 300;
+  line-height: 1.6;
+  font-size: 1.05rem;
+  max-width: 520px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  margin-bottom: 1.6rem;
+}
+.banner-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-    position:absolute;
-
-    left:50%;
-
-    top:42%;
-
-    transform:translate(-50%,-50%);
-
-    width:100%;
-
-    text-align:center;
-
-    padding:20px;
-
+/* ---------- ROWS ---------- */
+.rows { position: relative; z-index: 3; margin-top: -6vh; padding-bottom: 4rem; }
+.row-section { padding: 2rem 0 2rem 4vw; }
+.row-kicker {
+  color: var(--gold);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+.row-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.1rem;
+}
+.tabs { display: flex; gap: 0.6rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+.tab-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.22);
+  color: var(--muted);
+  padding: 0.55rem 1.5rem;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  font-family: "Montserrat";
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.tab-btn:hover { color: #fff; border-color: rgba(255,255,255,0.6); }
+.tab-btn.active {
+  background: rgba(90, 208, 255, 0.1);
+  border-color: var(--gold);
+  color: var(--gold);
+  box-shadow: 0 0 14px rgba(90, 208, 255, 0.2);
 }
 
-/*=============================
-        TITULO
-=============================*/
+.row-wrap { position: relative; }
+.row {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 3.5rem 4vw 3.5rem 0;
+  margin: -3.5rem 0;
+  scrollbar-width: none;
+}
+.row::-webkit-scrollbar { display: none; }
+.row.fade-swap { animation: fadeIn 0.5s ease; }
 
-.hero h1{
+.card {
+  position: relative;
+  flex: 0 0 auto;
+  width: 300px;
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.06);
+  cursor: pointer;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.card:hover {
+  transform: scale(1.14);
+  z-index: 20;
+  border-color: rgba(90, 208, 255, 0.4);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.85), 0 0 30px rgba(46, 123, 255, 0.25);
+}
+.card.no-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    repeating-linear-gradient(45deg, rgba(122,180,255,0.04) 0 14px, transparent 14px 28px),
+    linear-gradient(160deg, #16213a, #070b16);
+}
+.card.no-img::after {
+  content: attr(data-label);
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.9rem;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.4);
+}
+.card-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.9rem 0.9rem 0.7rem;
+  background: linear-gradient(0deg, rgba(0,0,0,0.9), transparent);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.card:hover .card-info { opacity: 1; transform: translateY(0); }
+.card-title { display: block; font-weight: 600; font-size: 1rem; }
+.card-sub { display: block; color: var(--muted); font-size: 0.8rem; }
 
-    font-size:60px;
+/* CONQUISTAS - cards com número */
+.card.ach {
+  aspect-ratio: 3 / 4;
+  width: 220px;
+  background: linear-gradient(160deg, #141d33, #070b16);
+  border: 1px solid rgba(122,180,255,0.12);
+  padding: 1.6rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.card.ach:hover { transform: scale(1.08); border-color: var(--gold-soft); box-shadow: 0 20px 48px rgba(0,0,0,0.85), 0 0 30px rgba(46, 123, 255, 0.25); }
+.ach-num {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 3.2rem;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: auto;
+}
+.ach-title { font-size: 1.05rem; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 0.45rem; padding-top: 0.9rem; position: relative; }
+.ach-title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 1px;
+  background: var(--gold-soft);
+}
+.ach-text { color: var(--muted); font-size: 0.85rem; font-weight: 300; line-height: 1.5; }
 
-    font-weight:300;
+/* ---------- ROW ARROWS ---------- */
+.row-arrow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4vw;
+  min-width: 44px;
+  border: none;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 2.2rem;
+  cursor: pointer;
+  z-index: 30;
+  opacity: 0;
+  transition: opacity 0.25s ease, background 0.25s ease;
+}
+.row-wrap:hover .row-arrow { opacity: 1; }
+.row-arrow:hover { background: rgba(0,0,0,0.85); }
+.row-arrow.left { left: 0; border-radius: 0 4px 4px 0; }
+.row-arrow.right { right: 0; border-radius: 4px 0 0 4px; }
 
-    letter-spacing:3px;
+/* ---------- MENSAGEM ---------- */
+.message-section {
+  padding: 5rem 4vw;
+  text-align: center;
+  background: radial-gradient(circle at 50% 50%, #101a30 0%, #070b16 80%);
+}
+.message-inner { max-width: 760px; margin: 0 auto; }
+.message-mark {
+  display: block;
+  font-family: var(--serif);
+  font-size: 5rem;
+  line-height: 0.5;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+}
+.message-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+  color: #fff;
+  line-height: 1.35;
+  margin-bottom: 1.8rem;
+}
+.message-body { color: var(--muted); font-weight: 300; line-height: 2; font-size: 1.02rem; }
+.message-rule {
+  width: 70px;
+  height: 1px;
+  background: var(--gold-soft);
+  margin: 2rem auto 0;
+}
+.message-sign { margin-top: 1.2rem; color: #e0e0e0; letter-spacing: 2px; font-size: 0.85rem; text-transform: uppercase; }
+#replayBtn { margin-top: 2.2rem; }
 
+/* ---------- FOOTER ---------- */
+.footer {
+  text-align: center;
+  padding: 2.8rem 1rem;
+  color: #6b6b6b;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  border-top: 1px solid rgba(255,255,255,0.06);
 }
 
-.hero h2{
-
-    margin-top:10px;
-
-    font-size:170px;
-
-    font-weight:800;
-
-    letter-spacing:8px;
-
-    background:
-
-    linear-gradient(
-        180deg,
-        #fff8c8,
-        #ffe27d,
-        #ffd54a,
-        #ffb300
-    );
-
-    -webkit-background-clip:text;
-
-    -webkit-text-fill-color:transparent;
-
-    text-shadow:
-
-    0 0 25px rgba(255,213,74,.4);
-
-}
-
-.hero p{
-
-    margin-top:10px;
-
-    font-size:42px;
-
-    opacity:.8;
-
-}
-
-/*=============================
-        BOTÃO
-=============================*/
-
-.hero button{
-
-    margin-top:45px;
-
-    padding:18px 55px;
-
-    border:none;
-
-    border-radius:50px;
-
-    cursor:pointer;
-
-    font-size:18px;
-
-    font-weight:600;
-
-    color:white;
-
-    background:
-
-    rgba(255,255,255,.08);
-
-    backdrop-filter:blur(20px);
-
-    border:1px solid rgba(255,255,255,.15);
-
-    transition:.35s;
-
-}
-
-.hero button:hover{
-
-    background:#FFD54A;
-
-    color:#111;
-
-    transform:translateY(-5px);
-
-    box-shadow:
-
-    0 0 30px rgba(255,213,74,.5);
-
-}
-
-/*=============================
-        CARROSSEL
-=============================*/
-
-.carousel{
-
-    position:absolute;
-
-    bottom:170px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    width:90%;
-
-    height:220px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:25px;
-
-    overflow-x:auto;
-
-    scrollbar-width:none;
-
-}
-
-.carousel::-webkit-scrollbar{
-
-    display:none;
-
-}
-
-.carousel img{
-
-    width:320px;
-
-    height:200px;
-
-    object-fit:cover;
-
-    border-radius:20px;
-
-    transition:.4s;
-
-    cursor:pointer;
-
-    box-shadow:
-
-    0 10px 25px rgba(0,0,0,.4);
-
-}
-
-.carousel img:hover{
-
-    transform:
-
-    scale(1.08);
-
-    box-shadow:
-
-    0 0 35px rgba(255,213,74,.35);
-
-}
-
-/*=============================
-        MENU
-=============================*/
-
-.bottomMenu{
-
-    position:absolute;
-
-    bottom:25px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    display:flex;
-
-    gap:20px;
-
-}
-
-.bottomMenu button{
-
-    width:170px;
-
-    height:80px;
-
-    border:none;
-
-    border-radius:20px;
-
-    cursor:pointer;
-
-    background:
-
-    rgba(255,255,255,.08);
-
-    color:white;
-
-    font-size:17px;
-
-    backdrop-filter:blur(15px);
-
-    transition:.35s;
-
-}
-
-.bottomMenu button:hover{
-
-    background:#FFD54A;
-
-    color:black;
-
-    transform:translateY(-6px);
-
-}
-
-/*=============================
-        PARTÍCULAS
-=============================*/
-
-body::before{
-
-    content:"";
-
-    position:fixed;
-
-    inset:0;
-
-    pointer-events:none;
-
-    background:
-
-    radial-gradient(circle,#FFD54A 1px,transparent 1px);
-
-    background-size:140px 140px;
-
-    opacity:.15;
-
-    animation:stars 25s linear infinite;
-
-}
-
-@keyframes stars{
-
-    from{
-
-        transform:translateY(0);
-
-    }
-
-    to{
-
-        transform:translateY(-140px);
-
-    }
-
-}
-
-/*=============================
-        RESPONSIVO
-=============================*/
-
-@media(max-width:900px){
-
-.hero h1{
-
-font-size:38px;
-
-}
-
-.hero h2{
-
-font-size:90px;
-
-}
-
-.hero p{
-
-font-size:26px;
-
-}
-
-.carousel{
-
-bottom:130px;
-
-}
-
-.carousel img{
-
-width:220px;
-
-height:140px;
-
-}
-
-.bottomMenu{
-
-flex-wrap:wrap;
-
-justify-content:center;
-
-}
-
-.bottomMenu button{
-
-width:140px;
-
-height:70px;
-
-}
-
+/* ---------- ANIMS ---------- */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 760px) {
+  .nav-left { gap: 1.2rem; }
+  .nav-links { gap: 0.9rem; }
+  .nav-links li { font-size: 0.8rem; }
+  .nav-logo { font-size: 1.6rem; }
+  .banner {
+    background: linear-gradient(0deg, var(--bg) 0%, rgba(7,11,22,0.45) 50%, rgba(7,11,22,0.75) 100%),
+                url("photos/hero.jpg") center/cover no-repeat;
+    align-items: flex-end;
+    padding-bottom: 12vh;
+    text-align: center;
+  }
+  .banner-btns { justify-content: center; }
+  .card { width: 240px; }
+  .card.ach { width: 180px; }
+  .row-arrow { display: none; }
+  .count-ring { width: 190px; height: 190px; }
+  .count-number { font-size: 5.5rem; }
 }
