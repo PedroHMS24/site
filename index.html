@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Feliz Aniversário Renzo | 16 Anos</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Confetti -->
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+</head>
+
+<body>
+
+<!--==================================================
+                CONTAGEM
+===================================================-->
+
+<div class="countdown">
+
+    <div class="count-number">5</div>
+
+    <div class="count-text">
+
+        Prepare-se...
+
+    </div>
+
+</div>
+
+<!--==================================================
+                VÍDEO
+===================================================-->
+
+<video id="video" preload="auto">
+
+    <source src="videos/historia.mp4" type="video/mp4">
+
+</video>
+
+<div class="video-overlay"></div>
+
+<!--==================================================
+                HERO
+===================================================-->
+
+<section class="hero fade">
+
+    <h1>
+
+        Feliz <span>Aniversário</span>
+
+    </h1>
+
+    <h2 class="glow">
+
+        RENZO
+
+    </h2>
+
+    <div class="subtitle">
+
+        16 ANOS
+
+    </div>
+
+    <p class="description">
+
+        Hoje celebramos mais um capítulo de uma história incrível.
+        Cada sorriso, cada conquista e cada momento vivido fizeram
+        você chegar até aqui.
+
+    </p>
+
+    <button class="start-btn">
+
+        <i class="fa-solid fa-play"></i>
+
+        Começar História
+
+    </button>
+
+</section>
+
+<!--==================================================
+            CARROSSEL
+===================================================-->
+
+<div class="carousel-panel"></div>
+
+<div class="carousel">
+
+    <button class="carousel-arrow left">
+
+        <i class="fa-solid fa-chevron-left"></i>
+
+    </button>
+
+    <div class="carousel-track">
+
+        <!-- FOTO 1 -->
+
+        <div class="photo">
+
+            <img src="img/foto1.jpg">
+
+            <div class="photo-title">
+
+                Primeiros Passos
+
+            </div>
+
+        </div>
+
+        <!-- FOTO 2 -->
+
+        <div class="photo">
+
+            <img src="img/foto2.jpg">
+
+            <div class="photo-title">
+
+                Família
+
+            </div>
+
+        </div>
+
+        <!-- FOTO 3 -->
+
+        <div class="photo">
+
+            <img src="img/foto3.jpg">
+
+            <div class="photo-title">
+
+                Amigos
+
+            </div>
+
+        </div>
+
+        <!-- FOTO 4 -->
+
+        <div class="photo">
+
+            <img src="img/foto4.jpg">
+
+            <div class="photo-title">
+
+                Viagens
+
+            </div>
+
+        </div>
+
+        <!-- FOTO 5 -->
+
+        <div class="photo">
+
+            <img src="img/foto5.jpg">
+
+            <div class="photo-title">
+
+                Aventuras
+
+            </div>
+
+        </div>
+
+        <!-- FOTO 6 -->
+
+        <div class="photo">
+
+            <img src="img/foto6.jpg">
+
+            <div class="photo-title">
+
+                Momentos
+
+            </div>
+
+        </div>
+
+        <!-- FOTO 7 -->
+
+        <div class="photo">
+
+            <img src="img/foto7.jpg">
+
+            <div class="photo-title">
+
+                Escola
+
+            </div>
+
+        </div>
+
+        <!-- FOTO 8 -->
+
+        <div class="photo">
+
+            <img src="img/foto8.jpg">
+
+            <div class="photo-title">
+
+                Esportes
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <button class="carousel-arrow right">
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+    </button>
+
+</div>
+
+<div class="carousel-dots">
+
+    <span class="active"></span>
+
+    <span></span>
+
+    <span></span>
+
+    <span></span>
+
+</div>
+
+<!--==================================================
+        MENU INFERIOR
+===================================================-->
+
+<div class="bottom-menu">
+
+    <div class="menu-card" data-panel="photos">
+
+        <div class="menu-icon">
+
+            📷
+
+        </div>
+
+        <div class="menu-title">
+
+            Fotos
+
+        </div>
+
+        <div class="menu-sub">
+
+            <span id="photoCounter"></span> registros
+
+        </div>
+
+    </div>
+
+    <div class="menu-card" data-panel="conquistas">
+
+        <div class="menu-icon">
+
+            🏆
+
+        </div>
+
+        <div class="menu-title">
+
+            Conquistas
+
+        </div>
+
+        <div class="menu-sub">
+
+            Grandes momentos
+
+        </div>
+
+    </div>
+
+    <div class="menu-card" data-panel="familia">
+
+        <div class="menu-icon">
+
+            ❤️
+
+        </div>
+
+        <div class="menu-title">
+
+            Família
+
+        </div>
+
+        <div class="menu-sub">
+
+            Quem sempre esteve ao lado
+
+        </div>
+
+    </div>
+
+    <div class="menu-card" data-panel="mensagens">
+
+        <div class="menu-icon">
+
+            💬
+
+        </div>
+
+        <div class="menu-title">
+
+            Mensagens
+
+        </div>
+
+        <div class="menu-sub">
+
+            Pessoas especiais
+
+        </div>
+
+    </div>
+
+</div>
+<!--==================================================
+                PAINEL FOTOS
+===================================================-->
+
+<div class="panel" id="photos">
+
+    <div class="panel-content">
+
+        <button class="close-panel">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <h2>📷 Galeria de Fotos</h2>
+
+        <div class="panel-grid">
+
+            <img src="img/foto1.jpg">
+            <img src="img/foto2.jpg">
+            <img src="img/foto3.jpg">
+            <img src="img/foto4.jpg">
+            <img src="img/foto5.jpg">
+            <img src="img/foto6.jpg">
+            <img src="img/foto7.jpg">
+            <img src="img/foto8.jpg">
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--==================================================
+            PAINEL CONQUISTAS
+===================================================-->
+
+<div class="panel" id="conquistas">
+
+    <div class="panel-content">
+
+        <button class="close-panel">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <h2>🏆 Conquistas</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>🎓 Escola</h3>
+                <p>Descreva aqui uma conquista importante.</p>
+            </div>
+
+            <div class="card">
+                <h3>⚽ Esportes</h3>
+                <p>Adicione outra conquista.</p>
+            </div>
+
+            <div class="card">
+                <h3>🥇 Campeonatos</h3>
+                <p>Mais um momento marcante.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--==================================================
+            PAINEL FAMÍLIA
+===================================================-->
+
+<div class="panel" id="familia">
+
+    <div class="panel-content">
+
+        <button class="close-panel">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <h2>❤️ Família</h2>
+
+        <p>
+
+            Aqui você pode colocar uma mensagem emocionante,
+            fotos ou até vídeos da família.
+
+        </p>
+
+    </div>
+
+</div>
+
+<!--==================================================
+            PAINEL MENSAGENS
+===================================================-->
+
+<div class="panel" id="mensagens">
+
+    <div class="panel-content">
+
+        <button class="close-panel">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <h2>💬 Mensagens</h2>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h3>Mãe ❤️</h3>
+
+                <p>
+
+                    Feliz aniversário! Que Deus continue
+                    iluminando sua vida.
+
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Pai 👏</h3>
+
+                <p>
+
+                    Temos muito orgulho de você!
+
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Amigos 🎉</h3>
+
+                <p>
+
+                    Que venham muitos anos de amizade!
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--==================================================
+                MODAL FOTO
+===================================================-->
+
+<div class="modal">
+
+    <div class="modal-content">
+
+        <button class="modal-close">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+        <img src="">
+
+    </div>
+
+</div>
+
+<!--==================================================
+            PROGRESSO DO VÍDEO
+===================================================-->
+
+<div class="video-progress">
+
+    <span></span>
+
+</div>
+
+<!--==================================================
+            TELA FINAL
+===================================================-->
+
+<div class="final-screen">
+
+    <h1>
+
+        Feliz Aniversário!
+
+    </h1>
+
+    <p>
+
+        Renzo, que seus 16 anos sejam repletos de
+        conquistas, saúde, felicidade e muitas
+        bênçãos de Deus.
+
+    </p>
+
+    <button class="restart">
+
+        Assistir Novamente
+
+    </button>
+
+</div>
+
+<!--==================================================
+                SCRIPTS
+===================================================-->
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
