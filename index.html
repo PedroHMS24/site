@@ -1,130 +1,905 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Renzo — 16 Anos</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>RENZO • 16 ANOS</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="style.css">
+
 </head>
+
 <body>
-  <button id="soundToggle" class="sound-toggle" aria-label="Ativar som" title="Ativar/desativar som">
-    <span class="sound-icon">♪</span>
-  </button>
 
-  <!-- TELA INICIAL (libera o áudio) -->
-  <section id="startScreen" class="screen start-screen">
+
+
+<!-- ========================================================= -->
+<!-- MÚSICA -->
+<!-- ========================================================= -->
+
+<audio id="bgMusic"
+       preload="auto"
+       loop>
+
+    <source
+        src="public/musica/fundo1.mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+
+<!-- ========================================================= -->
+<!-- BOTÃO SOM -->
+<!-- ========================================================= -->
+
+<button id="soundToggle"
+        class="sound-toggle">
+
+    <span class="sound-icon">
+
+        ♪
+
+    </span>
+
+</button>
+
+
+
+<!-- ========================================================= -->
+<!-- INTRO -->
+<!-- ========================================================= -->
+
+<section id="startScreen"
+         class="screen start-screen">
+
+    <div class="intro-background"></div>
+
     <div class="start-inner">
-      <h1 class="netflix-logo start-logo">RENZO</h1>
-      <p class="start-sub"><span class="rule"></span>16 ANOS<span class="rule"></span></p>
-      <button id="startBtn" class="nf-btn nf-btn-play">▶ Iniciar</button>
-      <p class="start-hint">Ative o som para a experiência completa</p>
-    </div>
-  </section>
 
-  <!-- CONTAGEM REGRESSIVA -->
-  <section id="countdown" class="screen countdown-screen hidden">
-    <div class="count-wrap">
-      <div class="count-ring">
-        <svg viewBox="0 0 120 120">
-          <circle class="ring-bg" cx="60" cy="60" r="54" />
-          <circle id="ringProgress" class="ring-progress" cx="60" cy="60" r="54" />
-        </svg>
-        <div id="countNumber" class="count-number">5</div>
-      </div>
-      <p class="count-label">A EXPERIÊNCIA COMEÇA EM</p>
-    </div>
-  </section>
+        <div class="intro-container">
 
-  <!-- REVELAÇÃO (estilo "tudum") -->
-  <section id="reveal" class="screen reveal-screen hidden">
+            <div class="intro-glow"></div>
+
+            <h1 class="intro-logo">
+
+                <span>R</span>
+                <span>E</span>
+                <span>N</span>
+                <span>Z</span>
+                <span>O</span>
+
+            </h1>
+
+        </div>
+
+        <div class="intro-ui">
+
+            <p class="start-sub">
+
+                <span class="rule"></span>
+
+                ESPECIAL • 16 ANOS
+
+                <span class="rule"></span>
+
+            </p>
+
+            <button id="startBtn"
+                    class="nf-btn nf-btn-play">
+
+                ▶ Iniciar Experiência
+
+            </button>
+
+            <p class="start-hint">
+
+                Coloque o som e aproveite.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- COUNTDOWN -->
+<!-- ========================================================= -->
+
+<section id="countdown"
+         class="screen countdown-screen hidden">
+
+    <div class="count-bg"></div>
+
+    <div class="count-content">
+
+        <span class="count-text">
+
+            A EXPERIÊNCIA COMEÇA EM
+
+        </span>
+
+        <h1 id="countNumber"
+            class="count-big">
+
+            5
+
+        </h1>
+
+        <div class="count-bar">
+
+            <div id="countFill"
+                 class="count-fill">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- REVEAL -->
+<!-- ========================================================= -->
+
+<section id="reveal"
+         class="screen reveal-screen hidden">
+
+    <div class="reveal-particles"></div>
+
     <div class="reveal-inner">
-      <h1 class="netflix-logo reveal-name">RENZO</h1>
-      <p class="reveal-kicker"><span class="rule"></span>FELIZ ANIVERSÁRIO · 16 ANOS<span class="rule"></span></p>
-    </div>
-  </section>
 
-  <!-- APLICATIVO ESTILO NETFLIX -->
-  <div id="app" class="app hidden">
-    <!-- NAVBAR -->
-    <nav id="navbar" class="navbar">
-      <div class="nav-left">
-        <span class="netflix-logo nav-logo">RENZO</span>
-        <ul class="nav-links">
-          <li data-target="banner" class="active">Início</li>
-          <li data-target="fotos">Fotos</li>
-          <li data-target="conquistas">Conquistas</li>
-          <li data-target="mensagem">Mensagem</li>
-        </ul>
-      </div>
-    </nav>
+        <h1 class="reveal-name">
 
-    <!-- BANNER / BILLBOARD -->
-    <header id="banner" class="banner">
-      <div class="banner-fade-bottom"></div>
-      <div class="banner-content">
-        <p class="banner-badge">ESPECIAL DE ANIVERSÁRIO</p>
-        <h1 class="banner-title">RENZO</h1>
-        <p class="banner-meta"><span class="rank">16 Anos</span><span class="dot">·</span>2010 — 2026<span class="dot">·</span>Aventura<span class="dot">·</span>Comédia<span class="dot">·</span>Amizade</p>
-        <p class="banner-desc">
-          A história de um garoto incrível contada em fotos, conquistas e memórias.
-          Escolha uma categoria abaixo e reviva os melhores momentos dos últimos anos.
+            RENZO
+
+        </h1>
+
+        <p class="reveal-kicker">
+
+            <span class="rule"></span>
+
+            FELIZ ANIVERSÁRIO
+
+            <span class="dot">•</span>
+
+            16 ANOS
+
+            <span class="rule"></span>
+
         </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- APP -->
+<!-- ========================================================= -->
+
+<div id="app"
+     class="app hidden">
+
+
+
+<!-- ========================================================= -->
+<!-- NAVBAR -->
+<!-- ========================================================= -->
+
+<nav id="navbar"
+     class="navbar">
+
+    <div class="nav-left">
+
+        <div class="nav-logo">
+
+            RENZO
+
+        </div>
+
+        <ul class="nav-links">
+
+            <li class="active"
+                data-target="banner">
+
+                Início
+
+            </li>
+
+            <li data-target="fotos">
+
+                Fotos
+
+            </li>
+
+            <li data-target="conquistas">
+
+                Conquistas
+
+            </li>
+
+            <li data-target="mensagem">
+
+                Mensagem
+
+            </li>
+
+        </ul>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ========================================================= -->
+<!-- HERO -->
+<!-- ========================================================= -->
+
+<header id="banner"
+        class="banner">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-particles"></div>
+
+    <div class="banner-content">
+
+        <div class="banner-badge">
+
+            ESPECIAL DE ANIVERSÁRIO
+
+        </div>
+
+        <h1 class="banner-title">
+
+            RENZO
+
+        </h1>
+
+        <p class="banner-meta">
+
+            <span class="rank">
+
+                16 ANOS
+
+            </span>
+
+            <span class="dot">•</span>
+
+            2010 — 2026
+
+            <span class="dot">•</span>
+
+            Amizade
+
+            <span class="dot">•</span>
+
+            Família
+
+            <span class="dot">•</span>
+
+            Aventuras
+
+        </p>
+
+        <p class="banner-desc">
+
+            Uma coleção de momentos,
+            conquistas e lembranças que
+            marcaram essa incrível jornada.
+
+        </p>
+
         <div class="banner-btns">
-          <button class="nf-btn nf-btn-play" data-target="fotos">▶ Ver Fotos</button>
-          <button class="nf-btn nf-btn-info" data-target="conquistas">Conquistas</button>
+
+            <button
+                class="nf-btn nf-btn-play"
+                data-target="fotos">
+
+                ▶ Ver Fotos
+
+            </button>
+
+            <button
+                class="nf-btn nf-btn-info"
+                data-target="mensagem">
+
+                Minha Mensagem
+
+            </button>
+
         </div>
-      </div>
-    </header>
 
-    <main class="rows">
-      <!-- FOTOS COM 3 ABAS -->
-      <section class="row-section" id="fotos">
-        <p class="row-kicker">Memórias</p>
-        <h2 class="row-title">Fotos</h2>
-        <div class="tabs" id="photoTabs"></div>
-        <div class="row-wrap">
-          <button class="row-arrow left" data-row="photoRow" aria-label="Anterior">‹</button>
-          <div class="row" id="photoRow"></div>
-          <button class="row-arrow right" data-row="photoRow" aria-label="Próximo">›</button>
+    </div>
+
+</header>
+
+
+
+<!-- ========================================================= -->
+<!-- CONTEÚDO -->
+<!-- ========================================================= -->
+
+<main class="rows">
+  <!-- ========================================================= -->
+<!-- FOTOS -->
+<!-- ========================================================= -->
+
+<section class="row-section" id="fotos">
+
+    <p class="row-kicker">
+
+        MEMÓRIAS
+
+    </p>
+
+    <h2 class="row-title">
+
+        Reviva os melhores momentos
+
+    </h2>
+
+    <div id="photoTabs" class="tabs"></div>
+
+    <div class="row-wrap">
+
+        <div id="photoRow" class="row"></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- CONQUISTAS -->
+<!-- ========================================================= -->
+
+<section class="row-section" id="conquistas">
+
+    <p class="row-kicker">
+
+        TRAJETÓRIA
+
+    </p>
+
+    <h2 class="row-title">
+
+        Conquistas
+
+    </h2>
+
+    <div class="row-wrap">
+
+        <div id="achRow" class="row"></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- MENSAGEM -->
+<!-- ========================================================= -->
+
+<section
+    id="mensagem"
+    class="message-section">
+
+    <div class="message-inner">
+
+        <span class="message-mark">
+
+            “
+
+        </span>
+
+        <p class="message-quote">
+
+            Algumas pessoas passam pela vida.
+            Outras deixam lembranças que permanecem
+            para sempre.
+
+        </p>
+
+        <p class="message-body">
+
+            Renzo,
+
+            hoje você completa mais um capítulo
+            de uma história construída por amizade,
+            carinho, desafios, vitórias e muitos
+            momentos inesquecíveis.
+
+            Continue sonhando alto,
+            acreditando em si mesmo
+            e vivendo cada dia com intensidade.
+
+            Que Deus ilumine seu caminho
+            e que os próximos anos sejam ainda
+            mais incríveis do que todos os que
+            já viveu até aqui.
+
+        </p>
+
+        <div class="message-rule"></div>
+
+        <p class="message-sign">
+
+            Feliz Aniversário!
+
+        </p>
+
+        <button
+            id="replayBtn"
+            class="nf-btn nf-btn-info">
+
+            ↺ Rever Introdução
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- SUGESTÕES -->
+<!-- ========================================================= -->
+
+<section class="row-section">
+
+    <p class="row-kicker">
+
+        CONTINUE ASSISTINDO
+
+    </p>
+
+    <h2 class="row-title">
+
+        Próximas Memórias
+
+    </h2>
+
+    <div class="suggest-grid">
+
+        <div class="suggest-card">
+
+            <span>📸</span>
+
+            <h3>Mais Fotos</h3>
+
+            <p>Reviva outros momentos especiais.</p>
+
         </div>
-      </section>
 
-      <!-- CONQUISTAS -->
-      <section class="row-section" id="conquistas">
-        <p class="row-kicker">Trajetória</p>
-        <h2 class="row-title">Conquistas</h2>
-        <div class="row-wrap">
-          <button class="row-arrow left" data-row="achRow" aria-label="Anterior">‹</button>
-          <div class="row" id="achRow"></div>
-          <button class="row-arrow right" data-row="achRow" aria-label="Próximo">›</button>
+        <div class="suggest-card">
+
+            <span>🏆</span>
+
+            <h3>Novas Conquistas</h3>
+
+            <p>Grandes histórias ainda estão por vir.</p>
+
         </div>
-      </section>
 
-      <!-- MENSAGEM -->
-      <section class="message-section" id="mensagem">
-        <div class="message-inner">
-          <span class="message-mark">“</span>
-          <p class="message-quote">Que os próximos anos sejam ainda maiores do que tudo o que já conquistou.</p>
-          <p class="message-body">
-            Renzo, os 16 anos marcam o início de uma nova fase. Que ela venha acompanhada
-            de novos objetivos, boas escolhas e memórias que valham a pena guardar.
-            Parabéns por tudo o que você já se tornou.
-          </p>
-          <div class="message-rule"></div>
-          <p class="message-sign">Com admiração, seus amigos</p>
-          <button id="replayBtn" class="nf-btn nf-btn-info">↺ Rever do início</button>
+        <div class="suggest-card">
+
+            <span>🎂</span>
+
+            <h3>17 Anos</h3>
+
+            <p>Uma nova temporada começa em breve.</p>
+
         </div>
-      </section>
 
-      <footer class="footer">
-        <p>RENZO<span class="dot">·</span>16 ANOS<span class="dot">·</span>2026</p>
-      </footer>
-    </main>
-  </div>
+    </div>
 
-  <script src="script.js"></script>
+</section>
+<!-- ========================================================= -->
+<!-- MODAL NETFLIX -->
+<!-- ========================================================= -->
+
+<div id="photoModal" class="photo-modal hidden">
+
+    <div class="photo-overlay"></div>
+
+    <div class="photo-window">
+
+        <!-- Imagem -->
+
+        <div class="photo-top">
+
+            <img
+                id="modalImage"
+                class="modal-image"
+                src=""
+                alt="">
+
+            <div class="photo-gradient"></div>
+
+            <!-- Botão Fechar -->
+
+            <button
+                id="closePhoto"
+                class="photo-close">
+
+                ✕
+
+            </button>
+
+            <!-- Botões -->
+
+            <div class="photo-buttons">
+
+                <button id="playPhoto" class="circle-btn">
+
+                    ▶
+
+                </button>
+
+                <button class="circle-btn">
+
+                    ❤
+
+                </button>
+
+                <button class="circle-btn">
+
+                    ⤴
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Informações -->
+
+        <div class="photo-info">
+
+            <div class="photo-meta">
+
+                <span id="modalYear" class="green">
+
+                    2024
+
+                </span>
+
+                <span>
+
+                    16 anos
+
+                </span>
+
+                <span>
+
+                    Memória Especial
+
+                </span>
+
+            </div>
+
+            <h2 id="modalTitle">
+
+                Título
+
+            </h2>
+
+            <p id="modalSubtitle">
+
+                Descrição da foto.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- Navegação -->
+
+        <button
+            id="prevPhoto"
+            class="photo-nav left">
+
+            ❮
+
+        </button>
+
+        <button
+            id="nextPhoto"
+            class="photo-nav right">
+
+            ❯
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================================= -->
+<!-- FOOTER -->
+<!-- ========================================================= -->
+
+<footer class="footer">
+
+    <div class="footer-logo">
+
+        RENZO
+
+    </div>
+
+    <p>
+
+        Especial de aniversário • 16 anos
+
+    </p>
+
+    <p>
+
+        Criado com ❤️ para celebrar momentos inesquecíveis.
+
+    </p>
+
+</footer>
+
+
+
+</main>
+
+</div>
+
+<!-- ====================================================== -->
+<!-- MODAL NETFLIX -->
+<!-- ====================================================== -->
+
+<div id="photoModal" class="photo-modal hidden">
+
+    <div class="photo-overlay"></div>
+
+    <div class="photo-window">
+
+        <!-- BOTÃO FECHAR -->
+
+        <button
+            id="closePhoto"
+            class="photo-close">
+
+            ✕
+
+        </button>
+
+        <!-- IMAGEM -->
+
+        <div class="photo-top">
+
+            <img
+                id="modalImage"
+                class="modal-image"
+                src=""
+                alt="Foto">
+
+            <div class="photo-gradient"></div>
+
+            <!-- BOTÕES -->
+
+            <div class="photo-buttons">
+
+                <button
+                    id="playPhoto"
+                    class="circle-btn">
+
+                    ▶
+
+                </button>
+
+                <button
+                    id="favoritePhoto"
+                    class="circle-btn">
+
+                    ❤
+
+                </button>
+
+                <button
+                    id="sharePhoto"
+                    class="circle-btn">
+
+                    ↗
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- INFORMAÇÕES -->
+
+        <div class="photo-info">
+
+            <div class="photo-meta">
+
+                <span class="green">
+
+                    2026
+
+                </span>
+
+                <span id="modalYear">
+
+                    2026
+
+                </span>
+
+                <span>
+
+                    Memória Especial
+
+                </span>
+
+            </div>
+
+            <h2 id="modalTitle">
+
+                Título
+
+            </h2>
+
+            <p id="modalSubtitle">
+
+                Descrição da fotografia.
+
+            </p>
+
+        </div>
+
+        <!-- ======================================= -->
+<!-- MAIS FOTOS -->
+<!-- ======================================= -->
+
+<section class="more-photos">
+
+    <div class="more-header">
+
+        <h3>
+
+            Mais Fotos
+
+        </h3>
+
+        <span class="more-count">
+
+            Continuar vendo
+
+        </span>
+
+    </div>
+
+    <div
+        id="modalThumbs"
+        class="thumb-row">
+
+    </div>
+
+    <!-- ======================================= -->
+<!-- INFORMAÇÕES EXTRAS -->
+<!-- ======================================= -->
+
+<div class="photo-details">
+
+    <div class="detail-item">
+
+        <span class="detail-title">
+
+            Categoria
+
+        </span>
+
+        <span id="detailCategory">
+
+            Destaques
+
+        </span>
+
+    </div>
+
+    <div class="detail-item">
+
+        <span class="detail-title">
+
+            Ano
+
+        </span>
+
+        <span id="detailYear">
+
+            2026
+
+        </span>
+
+    </div>
+
+    <div class="detail-item">
+
+        <span class="detail-title">
+
+            Tipo
+
+        </span>
+
+        <span>
+
+            Fotografia
+
+        </span>
+
+    </div>
+
+</div>
+
+</section>
+            </div>
+
+        </div>
+
+        <!-- NAVEGAÇÃO -->
+
+        <button
+            id="prevPhoto"
+            class="photo-nav left">
+
+            ❮
+
+        </button>
+
+        <button
+            id="nextPhoto"
+            class="photo-nav right">
+
+            ❯
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
+
 </html>
