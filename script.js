@@ -384,7 +384,7 @@ function showReveal(){
 
 function runCountdown(){
 
-    let value=5;
+    let value=1;
 
 
 
