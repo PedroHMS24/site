@@ -2,6 +2,7 @@
 // RENZO • 16 ANOS
 // SCRIPT.JS
 // PARTE 1
+// DADOS • ELEMENTOS • VARIÁVEIS
 //==========================================================
 
 
@@ -12,77 +13,60 @@
 
 const photoTabs = [
 
-{
+    {
+        id: "destaques",
+        label: "Destaques",
 
-id:"destaques",
+        items: [
 
-label:"Destaques",
+            { title:"2020", sub:"10 anos", img:"public/destaques/1.jpg" },
+            { title:"2021", sub:"11 anos", img:"public/destaques/2.jpg" },
+            { title:"2022", sub:"12 anos", img:"public/destaques/3.jpg" },
+            { title:"2023", sub:"13 anos", img:"public/destaques/4.jpg" },
+            { title:"2024", sub:"14 anos", img:"public/destaques/5.jpg" },
+            { title:"2025", sub:"15 anos", img:"public/destaques/6.jpg" }
 
-items:[
+        ]
 
-{title:"2020",sub:"10 anos",img:"public/destaques/1.jpg"},
+    },
 
-{title:"2021",sub:"11 anos",img:"public/destaques/2.jpg"},
+    {
 
-{title:"2022",sub:"12 anos",img:"public/destaques/3.jpg"},
+        id:"aventuras",
 
-{title:"2023",sub:"13 anos",img:"public/destaques/4.jpg"},
+        label:"Aventuras",
 
-{title:"2024",sub:"14 anos",img:"public/destaques/5.jpg"},
+        items:[
 
-{title:"2025",sub:"15 anos",img:"public/destaques/6.jpg"}
+            { title:"Viagens", sub:"Novos Lugares", img:"public/aventura/1.jpg" },
+            { title:"Esporte", sub:"Tatame", img:"public/aventura/2.jpg" },
+            { title:"Praia", sub:"Verão", img:"public/aventura/3.jpg" },
+            { title:"Eventos", sub:"Diversão", img:"public/aventura/4.jpg" },
+            { title:"Natureza", sub:"Trilhas", img:"public/aventura/5.jpg" },
+            { title:"Games", sub:"Momentos", img:"public/aventura/6.jpg" }
 
-]
+        ]
 
-},
+    },
 
-{
+    {
 
-id:"aventuras",
+        id:"familia",
 
-label:"Aventuras",
+        label:"Amigos & Família",
 
-items:[
+        items:[
 
-{title:"Viagens",sub:"Novos lugares",img:"public/aventura/1.jpg"},
+            { title:"Família", sub:"Sempre Juntos", img:"public/amigos/1.jpg" },
+            { title:"Amigos", sub:"Parceiros", img:"public/amigos/2.jpg" },
+            { title:"Festas", sub:"Momentos", img:"public/amigos/3.jpg" },
+            { title:"Escola", sub:"Turma", img:"public/amigos/4.jpg" },
+            { title:"Resenha", sub:"Diversão", img:"public/amigos/5.jpg" },
+            { title:"Lembranças", sub:"Inesquecíveis", img:"public/amigos/6.jpg" }
 
-{title:"Esporte",sub:"Tatame",img:"public/aventura/2.jpg"},
+        ]
 
-{title:"Praia",sub:"Verão",img:"public/aventura/3.jpg"},
-
-{title:"Eventos",sub:"Diversão",img:"public/aventura/4.jpg"},
-
-{title:"Natureza",sub:"Trilhas",img:"public/aventura/5.jpg"},
-
-{title:"Games",sub:"Momentos",img:"public/aventura/6.jpg"}
-
-]
-
-},
-
-{
-
-id:"familia",
-
-label:"Amigos & Família",
-
-items:[
-
-{title:"Família",sub:"Sempre juntos",img:"public/amigos/1.jpg"},
-
-{title:"Amigos",sub:"Parceiros",img:"public/amigos/2.jpg"},
-
-{title:"Festas",sub:"Momentos",img:"public/amigos/3.jpg"},
-
-{title:"Escola",sub:"Turma",img:"public/amigos/4.jpg"},
-
-{title:"Resenha",sub:"Diversão",img:"public/amigos/5.jpg"},
-
-{title:"Lembranças",sub:"Inesquecíveis",img:"public/amigos/6.jpg"}
-
-]
-
-}
+    }
 
 ];
 
@@ -98,7 +82,7 @@ const achievements=[
 
 title:"Superação",
 
-text:"Cada desafio enfrentado ajudou a construir quem você é."
+text:"Cada desafio ajudou a construir a pessoa incrível que você é."
 
 },
 
@@ -106,7 +90,7 @@ text:"Cada desafio enfrentado ajudou a construir quem você é."
 
 title:"Esporte",
 
-text:"Disciplina, coragem e determinação."
+text:"Disciplina, dedicação e espírito de equipe."
 
 },
 
@@ -114,7 +98,7 @@ text:"Disciplina, coragem e determinação."
 
 title:"Estudos",
 
-text:"Conhecimento abre portas para grandes sonhos."
+text:"Conhecimento abre portas para um grande futuro."
 
 },
 
@@ -122,7 +106,7 @@ text:"Conhecimento abre portas para grandes sonhos."
 
 title:"Amizade",
 
-text:"Grandes momentos são vividos ao lado de grandes pessoas."
+text:"Os melhores momentos sempre são compartilhados."
 
 },
 
@@ -130,7 +114,7 @@ text:"Grandes momentos são vividos ao lado de grandes pessoas."
 
 title:"Família",
 
-text:"O porto seguro de toda jornada."
+text:"A base que acompanha todas as conquistas."
 
 },
 
@@ -174,7 +158,21 @@ const bgMusic=document.getElementById("bgMusic");
 
 
 
-// Modal Netflix
+//==========================================================
+// FOTO
+//==========================================================
+
+const photoTabsContainer=document.getElementById("photoTabs");
+
+const photoRow=document.getElementById("photoRow");
+
+const achRow=document.getElementById("achRow");
+
+
+
+//==========================================================
+// MODAL
+//==========================================================
 
 const photoModal=document.getElementById("photoModal");
 
@@ -186,11 +184,23 @@ const modalSubtitle=document.getElementById("modalSubtitle");
 
 const modalYear=document.getElementById("modalYear");
 
+const modalThumbs=document.getElementById("modalThumbs");
+
+const detailCategory=document.getElementById("detailCategory");
+
+const detailYear=document.getElementById("detailYear");
+
 const closePhoto=document.getElementById("closePhoto");
 
 const prevPhoto=document.getElementById("prevPhoto");
 
 const nextPhoto=document.getElementById("nextPhoto");
+
+const playPhoto=document.getElementById("playPhoto");
+
+const favoritePhoto=document.getElementById("favoritePhoto");
+
+const sharePhoto=document.getElementById("sharePhoto");
 
 
 
@@ -208,87 +218,7 @@ let soundOn=true;
 
 let audioCtx=null;
 
-
-
-//==========================================================
-// ÁUDIO
-//==========================================================
-
-function initAudio(){
-
-if(audioCtx) return;
-
-audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-
-}
-
-
-
-function playBeep(
-
-freq=500,
-
-duration=.12,
-
-type="sine",
-
-volume=.15
-
-){
-
-if(!soundOn) return;
-
-if(!audioCtx) return;
-
-const osc=audioCtx.createOscillator();
-
-const gain=audioCtx.createGain();
-
-osc.type=type;
-
-osc.frequency.value=freq;
-
-gain.gain.setValueAtTime(0,audioCtx.currentTime);
-
-gain.gain.linearRampToValueAtTime(
-
-volume,
-
-audioCtx.currentTime+.01
-
-);
-
-gain.gain.exponentialRampToValueAtTime(
-
-0.001,
-
-audioCtx.currentTime+duration
-
-);
-
-osc.connect(gain);
-
-gain.connect(audioCtx.destination);
-
-osc.start();
-
-osc.stop(audioCtx.currentTime+duration);
-
-}
-
-
-
-function playTudum(){
-
-playBeep(73,.22,"sine",.35);
-
-setTimeout(()=>{
-
-playBeep(98,.45,"sine",.35);
-
-},180);
-
-}
+let touchStartX=0;
 
 
 
@@ -298,13 +228,13 @@ playBeep(98,.45,"sine",.35);
 
 photoTabs.forEach(tab=>{
 
-tab.items.forEach(photo=>{
+    tab.items.forEach(item=>{
 
-const img=new Image();
+        const img=new Image();
 
-img.src=photo.img;
+        img.src=item.img;
 
-});
+    });
 
 });
 
@@ -314,16 +244,194 @@ img.src=photo.img;
 // LOG
 //==========================================================
 
-console.log("RENZO 16 ANOS - PARTE 1 OK");
+console.log("PARTE 1 OK");
+
 //==========================================================
 // PARTE 2
-// INTRO • COUNTDOWN • REVEAL
+// ÁUDIO • INTRO • COUNTDOWN • REVEAL
 //==========================================================
 
 
 
 //==========================================================
-// ABRE O SITE
+// ÁUDIO
+//==========================================================
+
+function initAudio(){
+
+    if(audioCtx) return;
+
+    audioCtx=new(
+        window.AudioContext||
+        window.webkitAudioContext
+    )();
+
+}
+
+
+
+function playBeep(
+
+    freq=500,
+    duration=.12,
+    type="sine",
+    volume=.15
+
+){
+
+    if(!soundOn) return;
+
+    if(!audioCtx) return;
+
+    const osc=audioCtx.createOscillator();
+
+    const gain=audioCtx.createGain();
+
+    osc.type=type;
+
+    osc.frequency.value=freq;
+
+    gain.gain.setValueAtTime(
+        0,
+        audioCtx.currentTime
+    );
+
+    gain.gain.linearRampToValueAtTime(
+
+        volume,
+
+        audioCtx.currentTime+.01
+
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+
+        .001,
+
+        audioCtx.currentTime+duration
+
+    );
+
+    osc.connect(gain);
+
+    gain.connect(audioCtx.destination);
+
+    osc.start();
+
+    osc.stop(audioCtx.currentTime+duration);
+
+}
+
+
+
+//==========================================================
+// TUDUM
+//==========================================================
+
+function playTudum(){
+
+    playBeep(
+
+        73,
+
+        .22,
+
+        "sine",
+
+        .35
+
+    );
+
+    setTimeout(()=>{
+
+        playBeep(
+
+            98,
+
+            .45,
+
+            "sine",
+
+            .35
+
+        );
+
+    },180);
+
+}
+
+
+
+//==========================================================
+// COUNTDOWN
+//==========================================================
+
+function runCountdown(){
+
+    let value=5;
+
+    countNumber.textContent=value;
+
+    countFill.style.width="0%";
+
+    playBeep();
+
+    const timer=setInterval(()=>{
+
+        value--;
+
+        if(value<=0){
+
+            clearInterval(timer);
+
+            countFill.style.width="100%";
+
+            setTimeout(showReveal,500);
+
+            return;
+
+        }
+
+        countNumber.textContent=value;
+
+        countFill.style.width=
+
+        ((5-value)/5)*100+"%";
+
+        playBeep(
+
+            value===1?850:500,
+
+            .15
+
+        );
+
+    },1000);
+
+}
+
+
+
+//==========================================================
+// REVEAL
+//==========================================================
+
+function showReveal(){
+
+    countdown.classList.add("hidden");
+
+    reveal.classList.remove("hidden");
+
+    playTudum();
+
+    setTimeout(showApp,2500);
+
+}
+
+
+
+//==========================================================
+// APP
 //==========================================================
 
 function showApp(){
@@ -353,130 +461,12 @@ function showApp(){
 
 
 //==========================================================
-// REVEAL
-//==========================================================
-
-function showReveal(){
-
-    countdown.classList.add("hidden");
-
-    reveal.classList.remove("hidden");
-
-
-
-    playTudum();
-
-
-
-    setTimeout(()=>{
-
-        showApp();
-
-    },2500);
-
-}
-
-
-
-//==========================================================
-// COUNTDOWN
-//==========================================================
-
-function runCountdown(){
-
-    let value=1;
-
-
-
-    countNumber.textContent=value;
-
-    countFill.style.width="0%";
-
-
-
-    countNumber.classList.remove("pop");
-
-    void countNumber.offsetWidth;
-
-    countNumber.classList.add("pop");
-
-
-
-    playBeep(500,.15);
-
-
-
-    const timer=setInterval(()=>{
-
-        value--;
-
-
-
-        if(value<=0){
-
-            clearInterval(timer);
-
-            countFill.style.width="100%";
-
-
-
-            setTimeout(()=>{
-
-                showReveal();
-
-            },500);
-
-
-
-            return;
-
-        }
-
-
-
-        countNumber.textContent=value;
-
-
-
-        countFill.style.width=((5-value)/5)*100+"%";
-
-
-
-        countNumber.classList.remove("pop");
-
-        void countNumber.offsetWidth;
-
-        countNumber.classList.add("pop");
-
-
-
-        playBeep(
-
-            value===1?850:500,
-
-            .15
-
-        );
-
-
-
-    },1000);
-
-}
-
-
-
-//==========================================================
-// COMEÇAR EXPERIÊNCIA
+// INICIAR EXPERIÊNCIA
 //==========================================================
 
 function startExperience(){
 
-
-
     initAudio();
-
-
 
     if(audioCtx.state==="suspended"){
 
@@ -484,29 +474,23 @@ function startExperience(){
 
     }
 
-
-
     if(bgMusic){
 
         bgMusic.volume=.35;
 
         bgMusic.currentTime=0;
 
-
-
         bgMusic.play().catch(()=>{});
 
     }
 
-
-
     startScreen.classList.add("hidden");
 
+    reveal.classList.add("hidden");
 
+    app.classList.add("hidden");
 
     countdown.classList.remove("hidden");
-
-
 
     runCountdown();
 
@@ -520,23 +504,17 @@ function startExperience(){
 
 function replayExperience(){
 
-
-
     app.classList.add("hidden");
-
-
 
     reveal.classList.add("hidden");
 
+    countdown.classList.add("hidden");
 
-
-    countdown.classList.remove("hidden");
-
-
+    startScreen.classList.remove("hidden");
 
     countFill.style.width="0%";
 
-
+    countNumber.textContent="5";
 
     window.scrollTo({
 
@@ -546,25 +524,17 @@ function replayExperience(){
 
     });
 
-
-
-    runCountdown();
-
 }
 
 
 
 //==========================================================
-// BOTÃO SOM
+// SOM
 //==========================================================
 
 function toggleSound(){
 
-
-
     soundOn=!soundOn;
-
-
 
     soundToggle.classList.toggle(
 
@@ -574,17 +544,13 @@ function toggleSound(){
 
     );
 
-
-
     soundToggle.querySelector(
 
         ".sound-icon"
 
     ).textContent=
 
-        soundOn?"♪":"✕";
-
-
+    soundOn?"♪":"✕";
 
     if(bgMusic){
 
@@ -597,120 +563,31 @@ function toggleSound(){
 
 
 //==========================================================
-// HERO CINEMATOGRÁFICO
-//==========================================================
-
-function animateHero(){
-
-
-
-    const hero=document.querySelector(".banner");
-
-
-
-    if(!hero) return;
-
-
-
-    hero.animate([
-
-        {
-
-            transform:"scale(1.08)"
-
-        },
-
-        {
-
-            transform:"scale(1)"
-
-        }
-
-    ],{
-
-        duration:5000,
-
-        easing:"ease-out",
-
-        fill:"forwards"
-
-    });
-
-}
-
-
-
-//==========================================================
-// OBSERVER
-//==========================================================
-
-const heroObserver=new IntersectionObserver(
-
-(entries)=>{
-
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-
-animateHero();
-
-}
-
-});
-
-},
-
-{
-
-threshold:.5
-
-}
-
-);
-
-
-
-window.addEventListener("load",()=>{
-
-const hero=document.getElementById("banner");
-
-
-
-if(hero){
-
-heroObserver.observe(hero);
-
-}
-
-});
-
-
-
-//==========================================================
 // LOG
 //==========================================================
 
 console.log("PARTE 2 OK");
+
 //==========================================================
 // PARTE 3
-// CONSTRUÇÃO DO SITE
+// GALERIA • CONQUISTAS • NAVEGAÇÃO
 //==========================================================
 
 
 
 //==========================================================
-// MONTA TODO O SITE
+// CONSTRÓI O SITE
 //==========================================================
 
 function buildApp(){
 
     buildPhotoTabs();
 
-    renderPhotoRow(photoTabs[0]);
+    renderPhotoRow();
 
     buildAchievements();
 
-    animateCards();
+    initNavbar();
 
 }
 
@@ -720,37 +597,28 @@ function buildApp(){
 // CARD HTML
 //==========================================================
 
-function cardHTML(item,index){
+function cardHTML(photo,index){
 
     return `
 
-    <div class="card"
-
-         data-index="${index}">
+    <div class="card" data-index="${index}">
 
         <img
-
-            src="${item.img}"
-
-            alt="${item.title}"
-
-            loading="lazy"
-
-            onerror="this.closest('.card').classList.add('no-img');this.remove();"
-
-        >
+            src="${photo.img}"
+            alt="${photo.title}"
+            loading="lazy">
 
         <div class="card-info">
 
             <span class="card-title">
 
-                ${item.title}
+                ${photo.title}
 
             </span>
 
             <span class="card-sub">
 
-                ${item.sub}
+                ${photo.sub}
 
             </span>
 
@@ -770,55 +638,39 @@ function cardHTML(item,index){
 
 function buildPhotoTabs(){
 
-    const tabs=document.getElementById("photoTabs");
-
-
-
-    tabs.innerHTML=photoTabs.map((tab,i)=>{
-
-        return`
+    photoTabsContainer.innerHTML=photoTabs.map((tab,index)=>`
 
         <button
+            class="tab-btn ${index===0?"active":""}"
+            data-index="${index}">
 
-        class="tab-btn ${i===0?"active":""}"
-
-        data-tab="${i}">
-
-        ${tab.label}
+            ${tab.label}
 
         </button>
 
-        `;
-
-    }).join("");
+    `).join("");
 
 
 
-    tabs.querySelectorAll(".tab-btn").forEach(btn=>{
+    photoTabsContainer
+    .querySelectorAll(".tab-btn")
+    .forEach(btn=>{
 
-        btn.addEventListener("click",()=>{
+        btn.onclick=()=>{
 
-            currentTab=parseInt(btn.dataset.tab);
+            currentTab=parseInt(btn.dataset.index);
 
-
-
-            tabs.querySelectorAll(".tab-btn")
-
+            photoTabsContainer
+            .querySelectorAll(".tab-btn")
             .forEach(b=>b.classList.remove("active"));
-
-
 
             btn.classList.add("active");
 
+            renderPhotoRow();
 
+            playBeep(700,.05);
 
-            renderPhotoRow(photoTabs[currentTab]);
-
-
-
-            playBeep(650,.08);
-
-        });
+        };
 
     });
 
@@ -827,124 +679,80 @@ function buildPhotoTabs(){
 
 
 //==========================================================
-// RENDERIZA AS FOTOS
+// GALERIA
 //==========================================================
 
-function renderPhotoRow(tab){
-
-    const row=document.getElementById("photoRow");
-
-
-
-    row.innerHTML=tab.items
-
-    .map((item,index)=>cardHTML(item,index))
-
-    .join("");
-
-
-    row.querySelectorAll(".card img").forEach(img=>{
-
-    img.onload=()=>{
-
-        if(img.naturalHeight>img.naturalWidth){
-
-            img.closest(".card").classList.add("vertical");
-
-        }
-
-    };
-
-});
-
-
-    row.classList.remove("fade-swap");
-
-    void row.offsetWidth;
-
-    row.classList.add("fade-swap");
-
-
-
-    row.scrollLeft=0;
-
-
-
-    animateCards();
-
-    //==========================================================
-// CLIQUE NAS FOTOS
-//==========================================================
-
-row.querySelectorAll(".card").forEach((card,index)=>{
-
-    card.onclick=()=>{
-
-        currentPhoto=index;
-
-        openPhotoModal();
-
-    };
-
-});
-
-
-
-    row.querySelectorAll(".card")
-
-    .forEach(card=>{
-
-        card.addEventListener("click",()=>{
-
-            currentPhoto=parseInt(card.dataset.index);
-
-            //==========================================================
-// MINIATURAS DO MODAL
-//==========================================================
-
-function buildModalThumbs(){
-
-    const thumbs=document.getElementById("modalThumbs");
-
-    if(!thumbs) return;
-
-    thumbs.innerHTML="";
+function renderPhotoRow(){
 
     const photos=photoTabs[currentTab].items;
 
-    photos.forEach((photo,index)=>{
+    photoRow.innerHTML=photos
+    .map(cardHTML)
+    .join("");
 
-        const div=document.createElement("div");
 
-        div.className="thumb";
 
-        if(index===currentPhoto){
+    const cards=photoRow.querySelectorAll(".card");
 
-            div.classList.add("active");
 
-        }
 
-        div.innerHTML=`
-            <img
-                src="${photo.img}"
-                alt="${photo.title}">
-        `;
+    cards.forEach((card,index)=>{
 
-        div.addEventListener("click",()=>{
+        const img=card.querySelector("img");
+
+
+
+        img.onload=()=>{
+
+            if(img.naturalHeight>img.naturalWidth){
+
+                card.classList.add("vertical");
+
+            }
+
+        };
+
+
+
+        card.onclick=()=>{
 
             currentPhoto=index;
 
-            changeModalPhoto();
-
-        });
-
-        thumbs.appendChild(div);
-
-    });
-
-}
-
             openPhotoModal();
+
+        };
+
+
+
+        card.animate(
+
+        [
+
+        {
+
+            opacity:0,
+
+            transform:"translateY(40px)"
+
+        },
+
+        {
+
+            opacity:1,
+
+            transform:"translateY(0)"
+
+        }
+
+        ],
+
+        {
+
+            duration:500,
+
+            delay:index*70,
+
+            fill:"forwards"
 
         });
 
@@ -960,15 +768,7 @@ function buildModalThumbs(){
 
 function buildAchievements(){
 
-    const row=document.getElementById("achRow");
-
-
-
-    row.innerHTML=achievements
-
-    .map((item,index)=>{
-
-        return`
+    achRow.innerHTML=achievements.map((item,index)=>`
 
         <div class="card ach">
 
@@ -978,13 +778,13 @@ function buildAchievements(){
 
             </span>
 
-            <h3 class="ach-title">
+            <h3>
 
                 ${item.title}
 
             </h3>
 
-            <p class="ach-text">
+            <p>
 
                 ${item.text}
 
@@ -992,65 +792,45 @@ function buildAchievements(){
 
         </div>
 
-        `;
-
-    }).join("");
+    `).join("");
 
 
 
-    row.querySelectorAll(".card")
-
+    achRow
+    .querySelectorAll(".card")
     .forEach((card,index)=>{
 
-        card.style.opacity="0";
+        card.animate(
 
-        card.style.transform="translateY(50px)";
+        [
 
+        {
 
+            opacity:0,
 
-        setTimeout(()=>{
+            transform:"translateY(60px)"
 
-            card.style.transition=".6s";
+        },
 
-            card.style.opacity="1";
+        {
 
-            card.style.transform="translateY(0)";
+            opacity:1,
 
-        },index*120);
+            transform:"translateY(0)"
 
-    });
+        }
 
-}
+        ],
 
+        {
 
+            duration:700,
 
-//==========================================================
-// ANIMAÇÃO DOS CARDS
-//==========================================================
+            delay:index*120,
 
-function animateCards(){
+            fill:"forwards"
 
-    const cards=document.querySelectorAll("#photoRow .card");
-
-
-
-    cards.forEach((card,index)=>{
-
-        card.style.opacity="0";
-
-        card.style.transform="translateY(60px)";
-
-
-
-        setTimeout(()=>{
-
-            card.style.transition=".55s";
-
-            card.style.opacity="1";
-
-            card.style.transform="translateY(0)";
-
-        },index*100);
+        });
 
     });
 
@@ -1062,131 +842,111 @@ function animateCards(){
 // NAVBAR
 //==========================================================
 
-window.addEventListener("scroll",()=>{
+function initNavbar(){
 
-    if(app.classList.contains("hidden")) return;
+    window.addEventListener("scroll",()=>{
 
+        navbar.classList.toggle(
 
+            "scrolled",
 
-    navbar.classList.toggle(
+            window.scrollY>40
 
-        "scrolled",
+        );
 
-        window.scrollY>40
-
-    );
-
-});
+    });
 
 
 
-//==========================================================
-// MENU
-//==========================================================
+    document
+    .querySelectorAll("[data-target]")
+    .forEach(item=>{
 
-document.addEventListener("click",(e)=>{
+        item.onclick=()=>{
 
-    const btn=e.target.closest("[data-target]");
+            const section=document.getElementById(
 
+                item.dataset.target
 
-
-    if(!btn) return;
-
-
-
-    const section=document.getElementById(
-
-        btn.dataset.target
-
-    );
+            );
 
 
 
-    if(section){
+            if(section){
 
-        section.scrollIntoView({
+                section.scrollIntoView({
 
-            behavior:"smooth",
+                    behavior:"smooth"
 
-            block:"start"
+                });
+
+            }
+
+        };
+
+    });
+
+
+
+    const observer=new IntersectionObserver(
+
+    entries=>{
+
+        entries.forEach(entry=>{
+
+            if(!entry.isIntersecting) return;
+
+
+
+            document
+            .querySelectorAll(".nav-links li")
+            .forEach(li=>{
+
+                li.classList.toggle(
+
+                    "active",
+
+                    li.dataset.target===entry.target.id
+
+                );
+
+            });
 
         });
 
-    }
+    },
 
-});
+    {
 
+        threshold:.55
 
-
-//==========================================================
-// MENU ATIVO
-//==========================================================
-
-const sectionObserver=new IntersectionObserver(
-
-(entries)=>{
-
-entries.forEach(entry=>{
-
-if(!entry.isIntersecting) return;
+    });
 
 
 
-document
+    [
 
-.querySelectorAll(".nav-links li")
+        "banner",
 
-.forEach(li=>{
+        "fotos",
 
-li.classList.toggle(
+        "conquistas",
 
-"active",
+        "mensagem"
 
-li.dataset.target===entry.target.id
+    ].forEach(id=>{
 
-);
+        const section=document.getElementById(id);
 
-});
+        if(section){
 
-});
+            observer.observe(section);
 
-},
+        }
 
-{
-
-threshold:.55
+    });
 
 }
-
-);
-
-
-
-window.addEventListener("load",()=>{
-
-[
-
-"banner",
-
-"fotos",
-
-"conquistas",
-
-"mensagem"
-
-].forEach(id=>{
-
-const sec=document.getElementById(id);
-
-if(sec){
-
-sectionObserver.observe(sec);
-
-}
-
-});
-
-});
 
 
 
@@ -1195,6 +955,7 @@ sectionObserver.observe(sec);
 //==========================================================
 
 console.log("PARTE 3 OK");
+
 //==========================================================
 // PARTE 4
 // MODAL NETFLIX
@@ -1203,131 +964,58 @@ console.log("PARTE 3 OK");
 
 
 //==========================================================
-// ABRIR FOTO
+// MINIATURAS
 //==========================================================
 
-function openPhotoModal(){
+function buildModalThumbs(){
 
-    const photo=photoTabs[currentTab].items[currentPhoto];
+    if(!modalThumbs) return;
 
-    modalImage.src=photo.img;
+    modalThumbs.innerHTML="";
 
-    modalTitle.textContent=photo.title;
+    const photos=photoTabs[currentTab].items;
 
-    modalSubtitle.textContent=photo.sub;
+    photos.forEach((photo,index)=>{
 
-    buildModalThumbs();
+        const thumb=document.createElement("div");
 
-document.getElementById("detailCategory").textContent =
-photoTabs[currentTab].label;
+        thumb.className="thumb";
 
-document.getElementById("detailYear").textContent =
-photo.title;
+        if(index===currentPhoto){
 
-    modalYear.textContent=photo.title;
+            thumb.classList.add("active");
 
+        }
 
+        thumb.innerHTML=`
+            <img
+                src="${photo.img}"
+                alt="${photo.title}">
+        `;
 
-    photoModal.classList.remove("hidden");
+        thumb.onclick=()=>{
 
+            currentPhoto=index;
 
+            updateModal();
 
-    requestAnimationFrame(()=>{
+        };
 
-        photoModal.classList.add("show");
+        modalThumbs.appendChild(thumb);
 
     });
 
-
-
-    document.body.style.overflow="hidden";
-
 }
 
 
 
 //==========================================================
-// FECHAR
+// ATUALIZA O MODAL
 //==========================================================
 
-function closePhotoModal(){
-
-    photoModal.classList.remove("show");
-
-
-
-    setTimeout(()=>{
-
-        photoModal.classList.add("hidden");
-
-        document.body.style.overflow="";
-
-    },250);
-
-}
-
-
-
-//==========================================================
-// PRÓXIMA FOTO
-//==========================================================
-
-function nextPhotoModal(){
-
-    currentPhoto++;
-
-
-
-    if(currentPhoto>=photoTabs[currentTab].items.length){
-
-        currentPhoto=0;
-
-    }
-
-
-
-    changeModalPhoto();
-
-}
-
-
-
-//==========================================================
-// FOTO ANTERIOR
-//==========================================================
-
-function prevPhotoModal(){
-
-    currentPhoto--;
-
-
-
-    if(currentPhoto<0){
-
-        currentPhoto=
-
-        photoTabs[currentTab].items.length-1;
-
-    }
-
-
-
-    changeModalPhoto();
-
-}
-
-
-
-//==========================================================
-// TROCA FOTO
-//==========================================================
-
-function changeModalPhoto(){
-  
+function updateModal(){
 
     const photo=photoTabs[currentTab].items[currentPhoto];
-
-
 
     modalImage.animate(
 
@@ -1337,7 +1025,7 @@ function changeModalPhoto(){
 
             opacity:.3,
 
-            transform:"scale(.95)"
+            transform:"scale(.96)"
 
         },
 
@@ -1359,8 +1047,6 @@ function changeModalPhoto(){
 
     });
 
-
-
     modalImage.src=photo.img;
 
     modalTitle.textContent=photo.title;
@@ -1369,71 +1055,155 @@ function changeModalPhoto(){
 
     modalYear.textContent=photo.title;
 
+    if(detailCategory){
+
+        detailCategory.textContent=
+
+        photoTabs[currentTab].label;
+
+    }
+
+    if(detailYear){
+
+        detailYear.textContent=
+
+        photo.title;
+
+    }
+
+    buildModalThumbs();
+
+}
+
+
+
+//==========================================================
+// ABRIR
+//==========================================================
+
+function openPhotoModal(){
+
+    updateModal();
+
+    photoModal.classList.remove("hidden");
+
+    requestAnimationFrame(()=>{
+
+        photoModal.classList.add("show");
+
+    });
+
+    document.body.style.overflow="hidden";
+
 }
 
 
 
 //==========================================================
-// EVENTOS
+// FECHAR
 //==========================================================
 
-closePhoto.addEventListener(
+function closePhotoModal(){
 
-"click",
+    photoModal.classList.remove("show");
 
-closePhotoModal
+    setTimeout(()=>{
 
-);
+        photoModal.classList.add("hidden");
 
+        document.body.style.overflow="";
 
-
-nextPhoto.addEventListener(
-
-"click",
-
-nextPhotoModal
-
-);
-
-
-
-prevPhoto.addEventListener(
-
-"click",
-
-prevPhotoModal
-
-);
-
-
-
-//==========================================================
-// FECHAR CLICANDO FORA
-//==========================================================
-
-photoModal.addEventListener(
-
-"click",
-
-(e)=>{
-
-if(
-
-e.target.classList.contains("photo-modal")
-
-||
-
-e.target.classList.contains("photo-overlay")
-
-){
-
-closePhotoModal();
+    },250);
 
 }
 
+
+
+//==========================================================
+// PRÓXIMA FOTO
+//==========================================================
+
+function nextPhotoModal(){
+
+    currentPhoto++;
+
+    if(currentPhoto>=photoTabs[currentTab].items.length){
+
+        currentPhoto=0;
+
+    }
+
+    updateModal();
+
 }
 
-);
+
+
+//==========================================================
+// FOTO ANTERIOR
+//==========================================================
+
+function prevPhotoModal(){
+
+    currentPhoto--;
+
+    if(currentPhoto<0){
+
+        currentPhoto=
+
+        photoTabs[currentTab].items.length-1;
+
+    }
+
+    updateModal();
+
+}
+
+
+
+//==========================================================
+// EVENTOS DO MODAL
+//==========================================================
+
+if(closePhoto){
+
+    closePhoto.onclick=closePhotoModal;
+
+}
+
+if(nextPhoto){
+
+    nextPhoto.onclick=nextPhotoModal;
+
+}
+
+if(prevPhoto){
+
+    prevPhoto.onclick=prevPhotoModal;
+
+}
+
+
+
+//==========================================================
+// FECHAR AO CLICAR FORA
+//==========================================================
+
+photoModal.addEventListener("click",(e)=>{
+
+    if(
+
+        e.target===photoModal ||
+
+        e.target.classList.contains("photo-overlay")
+
+    ){
+
+        closePhotoModal();
+
+    }
+
+});
 
 
 
@@ -1441,145 +1211,125 @@ closePhotoModal();
 // TECLADO
 //==========================================================
 
-document.addEventListener(
+document.addEventListener("keydown",(e)=>{
 
-"keydown",
+    if(photoModal.classList.contains("hidden")) return;
 
-(e)=>{
+    switch(e.key){
 
-if(photoModal.classList.contains("hidden"))
+        case"Escape":
 
-return;
+            closePhotoModal();
 
+        break;
 
+        case"ArrowRight":
 
-switch(e.key){
+            nextPhotoModal();
 
-case"Escape":
+        break;
 
-closePhotoModal();
+        case"ArrowLeft":
 
-break;
+            prevPhotoModal();
 
+        break;
 
-
-case"ArrowRight":
-
-nextPhotoModal();
-
-break;
-
-
-
-case"ArrowLeft":
-
-prevPhotoModal();
-
-break;
-
-}
-
-}
-
-);
-
-
-
-//==========================================================
-// SWIPE MOBILE
-//==========================================================
-
-let touchStartX=0;
-
-
-
-photoModal.addEventListener(
-
-"touchstart",
-
-e=>{
-
-touchStartX=e.changedTouches[0].clientX;
-
-}
-
-);
-
-
-
-photoModal.addEventListener(
-
-"touchend",
-
-e=>{
-
-const touchEnd=e.changedTouches[0].clientX;
-
-const dist=touchEnd-touchStartX;
-
-
-
-if(dist>60){
-
-prevPhotoModal();
-
-}
-
-
-
-if(dist<-60){
-
-nextPhotoModal();
-
-}
+    }
 
 });
 
 
 
 //==========================================================
-// PLAY
+// SWIPE
 //==========================================================
 
-const playPhoto=document.getElementById("playPhoto");
+photoModal.addEventListener("touchstart",(e)=>{
+
+    touchStartX=e.changedTouches[0].clientX;
+
+});
 
 
+
+photoModal.addEventListener("touchend",(e)=>{
+
+    const dist=
+
+    e.changedTouches[0].clientX-touchStartX;
+
+    if(dist>60){
+
+        prevPhotoModal();
+
+    }
+
+    if(dist<-60){
+
+        nextPhotoModal();
+
+    }
+
+});
+
+
+
+//==========================================================
+// BOTÃO PLAY
+//==========================================================
 
 if(playPhoto){
 
-playPhoto.addEventListener(
+    playPhoto.onclick=()=>{
 
-"click",
+        alert("Aqui futuramente poderá abrir um vídeo dessa lembrança.");
 
-()=>{
-
-alert(
-
-"Aqui você pode colocar um vídeo dessa lembrança futuramente."
-
-);
-
-});
+    };
 
 }
 
 
 
 //==========================================================
-// PRELOAD DAS FOTOS
+// FAVORITO
 //==========================================================
 
-photoTabs.forEach(tab=>{
+if(favoritePhoto){
 
-tab.items.forEach(item=>{
+    favoritePhoto.onclick=()=>{
 
-const img=new Image();
+        favoritePhoto.classList.toggle("liked");
 
-img.src=item.img;
+    };
 
-});
+}
 
-});
+
+
+//==========================================================
+// COMPARTILHAR
+//==========================================================
+
+if(sharePhoto){
+
+    sharePhoto.onclick=()=>{
+
+        if(navigator.share){
+
+            navigator.share({
+
+                title:modalTitle.textContent,
+
+                text:modalSubtitle.textContent
+
+            });
+
+        }
+
+    };
+
+}
 
 
 
@@ -1588,15 +1338,17 @@ img.src=item.img;
 //==========================================================
 
 console.log("PARTE 4 OK");
+
+
 //==========================================================
 // PARTE 5
-// ANIMAÇÕES PREMIUM
+// ANIMAÇÕES • HERO • EVENTOS • INICIALIZAÇÃO
 //==========================================================
 
 
 
 //==========================================================
-// HERO - EFEITO KEN BURNS
+// HERO KEN BURNS
 //==========================================================
 
 function heroAnimation(){
@@ -1605,7 +1357,9 @@ function heroAnimation(){
 
     if(!hero) return;
 
-    hero.animate([
+    hero.animate(
+
+    [
 
         {
 
@@ -1619,7 +1373,9 @@ function heroAnimation(){
 
         }
 
-    ],{
+    ],
+
+    {
 
         duration:18000,
 
@@ -1634,27 +1390,7 @@ function heroAnimation(){
 
 
 //==========================================================
-// PARALLAX
-//==========================================================
-
-document.addEventListener("mousemove",(e)=>{
-
-    const hero=document.querySelector(".banner");
-
-    if(!hero) return;
-
-    const x=(e.clientX/window.innerWidth-.5)*12;
-
-    const y=(e.clientY/window.innerHeight-.5)*12;
-
-    hero.style.backgroundPosition=`calc(50% + ${x}px) calc(50% + ${y}px)`;
-
-});
-
-
-
-//==========================================================
-// CURSOR LUMINOSO
+// CURSOR GLOW
 //==========================================================
 
 const cursor=document.createElement("div");
@@ -1662,8 +1398,6 @@ const cursor=document.createElement("div");
 cursor.className="cursorGlow";
 
 document.body.appendChild(cursor);
-
-
 
 document.addEventListener("mousemove",(e)=>{
 
@@ -1676,34 +1410,42 @@ document.addEventListener("mousemove",(e)=>{
 
 
 //==========================================================
-// BOTÕES
+// PARALLAX HERO
 //==========================================================
 
-document.querySelectorAll(".nf-btn").forEach(btn=>{
+document.addEventListener("mousemove",(e)=>{
 
-    btn.addEventListener("mouseenter",()=>{
+    const hero=document.querySelector(".banner");
 
-        playBeep(900,.05);
+    if(!hero) return;
 
-    });
+    const x=(e.clientX/window.innerWidth-.5)*15;
+
+    const y=(e.clientY/window.innerHeight-.5)*15;
+
+    hero.style.backgroundPosition=
+
+        `calc(50% + ${x}px) calc(50% + ${y}px)`;
 
 });
 
 
 
 //==========================================================
-// ANIMAÇÃO DOS CARDS
+// ANIMAÇÃO DAS SEÇÕES
 //==========================================================
 
-function cardsReveal(){
+const revealObserver=new IntersectionObserver(
 
-    const cards=document.querySelectorAll(".card");
+(entries)=>{
 
+    entries.forEach(entry=>{
 
+        if(!entry.isIntersecting) return;
 
-    cards.forEach((card,index)=>{
+        entry.target.animate(
 
-        card.animate([
+        [
 
             {
 
@@ -1721,13 +1463,11 @@ function cardsReveal(){
 
             }
 
-        ],{
+        ],
+
+        {
 
             duration:700,
-
-            delay:index*90,
-
-            easing:"ease-out",
 
             fill:"forwards"
 
@@ -1735,57 +1475,11 @@ function cardsReveal(){
 
     });
 
-}
-
-
-
-//==========================================================
-// OBSERVER
-//==========================================================
-
-const revealObserver=new IntersectionObserver(
-
-(entries)=>{
-
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-
-entry.target.animate([
-
-{
-
-opacity:0,
-
-transform:"translateY(60px)"
-
 },
 
 {
 
-opacity:1,
-
-transform:"translateY(0)"
-
-}
-
-],{
-
-duration:900,
-
-fill:"forwards"
-
-});
-
-}
-
-});
-
-},
-
-{
-
-threshold:.18
+threshold:.15
 
 }
 
@@ -1799,7 +1493,33 @@ document.querySelectorAll(
 
 ).forEach(sec=>{
 
-revealObserver.observe(sec);
+    revealObserver.observe(sec);
+
+});
+
+
+
+//==========================================================
+// HOVER BOTÕES
+//==========================================================
+
+document.querySelectorAll(".nf-btn").forEach(btn=>{
+
+    btn.addEventListener("mouseenter",()=>{
+
+        playBeep(
+
+            900,
+
+            .05,
+
+            "sine",
+
+            .08
+
+        );
+
+    });
 
 });
 
@@ -1811,123 +1531,97 @@ revealObserver.observe(sec);
 
 window.addEventListener("load",()=>{
 
-const items=document.querySelectorAll(
+    const heroItems=document.querySelectorAll(
 
-".banner-badge,.banner-title,.banner-meta,.banner-desc,.banner-btns"
+        ".banner-badge,.banner-title,.banner-meta,.banner-desc,.banner-btns"
 
-);
+    );
 
 
 
-items.forEach((el,index)=>{
+    heroItems.forEach((item,index)=>{
 
-el.animate([
+        item.animate(
 
-{
+        [
 
-opacity:0,
+            {
 
-transform:"translateY(40px)"
+                opacity:0,
 
-},
+                transform:"translateY(35px)"
 
-{
+            },
 
-opacity:1,
+            {
 
-transform:"translateY(0)"
+                opacity:1,
 
-}
+                transform:"translateY(0)"
 
-],{
+            }
 
-duration:900,
+        ],
 
-delay:index*220,
+        {
 
-fill:"forwards"
+            duration:700,
 
-});
+            delay:index*180,
 
-});
+            fill:"forwards"
+
+        });
+
+    });
 
 });
 
 
 
 //==========================================================
-// HOVER DOS CARDS
+// EVENTOS
 //==========================================================
 
-document.addEventListener("mouseover",(e)=>{
+if(startBtn){
 
-const card=e.target.closest(".card");
+    startBtn.addEventListener(
 
+        "click",
 
+        startExperience
 
-if(!card) return;
-
-
-
-card.animate([
-
-{
-
-transform:"scale(1)"
-
-},
-
-{
-
-transform:"scale(1.08)"
+    );
 
 }
 
-],{
-
-duration:180,
-
-fill:"forwards"
-
-});
-
-});
 
 
+if(replayBtn){
 
-document.addEventListener("mouseout",(e)=>{
+    replayBtn.addEventListener(
 
-const card=e.target.closest(".card");
+        "click",
 
+        replayExperience
 
-
-if(!card) return;
-
-
-
-card.animate([
-
-{
-
-transform:"scale(1.08)"
-
-},
-
-{
-
-transform:"scale(1)"
+    );
 
 }
 
-],{
 
-duration:180,
 
-fill:"forwards"
+if(soundToggle){
 
-});
+    soundToggle.addEventListener(
 
-});
+        "click",
+
+        toggleSound
+
+    );
+
+}
 
 
 
@@ -1937,7 +1631,276 @@ fill:"forwards"
 
 heroAnimation();
 
-cardsReveal();
+
+
+//==========================================================
+// LOG
+//==========================================================
+
+console.log("RENZO • SCRIPT COMPLETO");
+
+//==========================================================
+// PARTE 6
+// RECURSOS PREMIUM
+//==========================================================
+
+
+
+//==========================================================
+// FAVORITOS
+//==========================================================
+
+const favorites=new Set(
+
+JSON.parse(
+
+localStorage.getItem("renzoFavorites")||"[]"
+
+)
+
+);
+
+function saveFavorites(){
+
+localStorage.setItem(
+
+"renzoFavorites",
+
+JSON.stringify([...favorites])
+
+);
+
+}
+
+function updateFavoriteButton(){
+
+if(!favoritePhoto) return;
+
+const key=currentTab+"-"+currentPhoto;
+
+favoritePhoto.classList.toggle(
+
+"liked",
+
+favorites.has(key)
+
+);
+
+}
+
+if(favoritePhoto){
+
+favoritePhoto.addEventListener("click",()=>{
+
+const key=currentTab+"-"+currentPhoto;
+
+if(favorites.has(key)){
+
+favorites.delete(key);
+
+}else{
+
+favorites.add(key);
+
+}
+
+saveFavorites();
+
+updateFavoriteButton();
+
+});
+
+}
+
+
+
+//==========================================================
+// SLIDESHOW
+//==========================================================
+
+let slideshow=null;
+
+function startSlideshow(){
+
+stopSlideshow();
+
+slideshow=setInterval(()=>{
+
+nextPhotoModal();
+
+},3500);
+
+}
+
+function stopSlideshow(){
+
+if(slideshow){
+
+clearInterval(slideshow);
+
+slideshow=null;
+
+}
+
+}
+
+
+
+//==========================================================
+// PLAY
+//==========================================================
+
+if(playPhoto){
+
+playPhoto.onclick=()=>{
+
+if(slideshow){
+
+stopSlideshow();
+
+playPhoto.innerHTML="▶";
+
+}else{
+
+startSlideshow();
+
+playPhoto.innerHTML="❚❚";
+
+}
+
+};
+
+}
+
+
+
+//==========================================================
+// ESPAÇO = PLAY
+//==========================================================
+
+document.addEventListener("keydown",(e)=>{
+
+if(photoModal.classList.contains("hidden"))
+
+return;
+
+if(e.code==="Space"){
+
+e.preventDefault();
+
+playPhoto.click();
+
+}
+
+});
+
+
+
+//==========================================================
+// PROGRESSO
+//==========================================================
+
+const progress=document.createElement("div");
+
+progress.className="photo-progress";
+
+if(photoModal){
+
+photoModal.appendChild(progress);
+
+}
+
+function animateProgress(){
+
+progress.animate(
+
+[
+
+{width:"0%"},
+
+{width:"100%"}
+
+],
+
+{
+
+duration:3500,
+
+fill:"forwards"
+
+}
+
+);
+
+}
+
+
+
+//==========================================================
+// ALTERAÇÃO FOTO
+//==========================================================
+
+const oldUpdateModal=updateModal;
+
+updateModal=function(){
+
+oldUpdateModal();
+
+updateFavoriteButton();
+
+animateProgress();
+
+}
+
+
+
+//==========================================================
+// CONFETE
+//==========================================================
+
+function birthdayConfetti(){
+
+for(let i=0;i<40;i++){
+
+const c=document.createElement("div");
+
+c.className="confetti";
+
+c.style.left=Math.random()*100+"vw";
+
+c.style.animationDelay=Math.random()*2+"s";
+
+c.style.animationDuration=
+
+3+Math.random()*2+"s";
+
+document.body.appendChild(c);
+
+setTimeout(()=>{
+
+c.remove();
+
+},5000);
+
+}
+
+}
+
+
+
+//==========================================================
+// UMA ÚNICA VEZ
+//==========================================================
+
+window.addEventListener("load",()=>{
+
+setTimeout(()=>{
+
+birthdayConfetti();
+
+},1200);
+
+});
 
 
 
@@ -1945,25 +1908,320 @@ cardsReveal();
 // LOG
 //==========================================================
 
-console.log("RENZO • SITE PREMIUM CARREGADO");
+console.log("PARTE 6 OK");
+
+
 //==========================================================
-// EVENTOS
+// PARTE 7
+// EXPERIÊNCIA PREMIUM
 //==========================================================
 
-if(startBtn){
 
-    startBtn.addEventListener("click", startExperience);
+
+//==========================================================
+// SALVAR ÚLTIMA ABA
+//==========================================================
+
+function saveCurrentTab(){
+
+    localStorage.setItem(
+
+        "renzoTab",
+
+        currentTab
+
+    );
 
 }
 
-if(replayBtn){
+function loadCurrentTab(){
 
-    replayBtn.addEventListener("click", replayExperience);
+    const saved=
+
+    parseInt(
+
+        localStorage.getItem("renzoTab")
+
+    );
+
+    if(!isNaN(saved)){
+
+        currentTab=saved;
+
+    }
 
 }
 
-if(soundToggle){
 
-    soundToggle.addEventListener("click", toggleSound);
+
+//==========================================================
+// SOBRESCREVE BUILDAPP
+//==========================================================
+
+const oldBuildApp=buildApp;
+
+buildApp=function(){
+
+    loadCurrentTab();
+
+    oldBuildApp();
 
 }
+
+
+
+//==========================================================
+// TROCA DE ABA
+//==========================================================
+
+const oldRenderPhotoRow=renderPhotoRow;
+
+renderPhotoRow=function(){
+
+    saveCurrentTab();
+
+    oldRenderPhotoRow();
+
+}
+
+
+
+//==========================================================
+// BOTÃO TOPO
+//==========================================================
+
+const backTop=document.createElement("button");
+
+backTop.className="back-top";
+
+backTop.innerHTML="▲";
+
+document.body.appendChild(backTop);
+
+backTop.onclick=()=>{
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+};
+
+window.addEventListener("scroll",()=>{
+
+backTop.classList.toggle(
+
+"show",
+
+window.scrollY>500
+
+);
+
+});
+
+
+
+//==========================================================
+// ZOOM FOTO
+//==========================================================
+
+let zoom=false;
+
+if(modalImage){
+
+modalImage.addEventListener("click",()=>{
+
+zoom=!zoom;
+
+modalImage.style.transform=
+
+zoom?
+
+"scale(1.7)":
+
+"scale(1)";
+
+modalImage.style.cursor=
+
+zoom?
+
+"zoom-out":
+
+"zoom-in";
+
+});
+
+}
+
+
+
+//==========================================================
+// TECLAS
+//==========================================================
+
+document.addEventListener("keydown",(e)=>{
+
+switch(e.key){
+
+case"Home":
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+break;
+
+case"End":
+
+window.scrollTo({
+
+top:document.body.scrollHeight,
+
+behavior:"smooth"
+
+});
+
+break;
+
+}
+
+});
+
+
+
+//==========================================================
+// FADE DA MÚSICA
+//==========================================================
+
+function fadeMusic(target){
+
+if(!bgMusic) return;
+
+const interval=setInterval(()=>{
+
+if(Math.abs(bgMusic.volume-target)<0.02){
+
+bgMusic.volume=target;
+
+clearInterval(interval);
+
+return;
+
+}
+
+bgMusic.volume+=
+
+target>bgMusic.volume?
+
+0.02:-0.02;
+
+},40);
+
+}
+
+
+
+//==========================================================
+// MODAL
+//==========================================================
+
+const oldOpen=openPhotoModal;
+
+openPhotoModal=function(){
+
+fadeMusic(.18);
+
+oldOpen();
+
+};
+
+const oldClose=closePhotoModal;
+
+closePhotoModal=function(){
+
+fadeMusic(.35);
+
+oldClose();
+
+};
+
+
+
+//==========================================================
+// LOADING FOTO
+//==========================================================
+
+if(modalImage){
+
+modalImage.addEventListener("load",()=>{
+
+modalImage.classList.add("loaded");
+
+});
+
+}
+
+
+
+//==========================================================
+// PARALLAX HERO
+//==========================================================
+
+window.addEventListener("scroll",()=>{
+
+const hero=document.querySelector(".banner");
+
+if(!hero) return;
+
+hero.style.backgroundPositionY=
+
+window.scrollY*.35+"px";
+
+});
+
+
+
+//==========================================================
+// AUTOFOCUS NAVBAR
+//==========================================================
+
+const navItems=document.querySelectorAll(
+
+".nav-links li"
+
+);
+
+navItems.forEach(item=>{
+
+item.addEventListener("mouseenter",()=>{
+
+playBeep(
+
+950,
+
+.03,
+
+"sine",
+
+.05
+
+);
+
+});
+
+});
+
+
+
+//==========================================================
+// LOG
+//==========================================================
+
+console.log("PARTE 7 OK");
