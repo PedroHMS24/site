@@ -1291,13 +1291,25 @@ justify-content:center;
 
     object-fit:cover;
 
-    transition:
+    object-position:center;
 
-        transform .45s,
+    transition:.35s;
 
-        filter .45s;
+
+    /*==========================================================
+ FOTO VERTICAL
+==========================================================*/
+
+.card.vertical img{
+
+    object-fit:contain;
+
+    background:#080d16;
 
 }
+
+}
+
 
 .card:hover{
 

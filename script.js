@@ -843,6 +843,20 @@ function renderPhotoRow(tab){
     .join("");
 
 
+    row.querySelectorAll(".card img").forEach(img=>{
+
+    img.onload=()=>{
+
+        if(img.naturalHeight>img.naturalWidth){
+
+            img.closest(".card").classList.add("vertical");
+
+        }
+
+    };
+
+});
+
 
     row.classList.remove("fade-swap");
 
@@ -857,6 +871,22 @@ function renderPhotoRow(tab){
 
 
     animateCards();
+
+    //==========================================================
+// CLIQUE NAS FOTOS
+//==========================================================
+
+row.querySelectorAll(".card").forEach((card,index)=>{
+
+    card.onclick=()=>{
+
+        currentPhoto=index;
+
+        openPhotoModal();
+
+    };
+
+});
 
 
 
