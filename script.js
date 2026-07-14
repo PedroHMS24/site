@@ -54,6 +54,7 @@ const photoTabs = [
         id:"familia",
 
         label:"Amigos & Família",
+
         items:[
 
             { title:"Família", sub:"Sempre Juntos", img:"public/amigos/1.jpg" },
@@ -71,57 +72,75 @@ const photoTabs = [
 
 
 
-//==========================================================
-// CONQUISTAS
-//==========================================================
-
 const achievements=[
 
 {
 
-title:"Superação",
+title:"Primeiros Passos",
 
-text:"Cada desafio ajudou a construir a pessoa incrível que você é."
+year:"2010",
 
-},
+time:"10 min",
 
-{
+img:"public/episodios/1.jpg",
 
-title:"Esporte",
-
-text:"Disciplina, dedicação e espírito de equipe."
+text:"Toda grande história começa com um pequeno passo."
 
 },
 
 {
 
-title:"Estudos",
+title:"Primeiro Dia de Aula",
 
-text:"Conhecimento abre portas para um grande futuro."
+year:"2015",
 
-},
+time:"12 min",
 
-{
+img:"public/episodios/2.jpg",
 
-title:"Amizade",
-
-text:"Os melhores momentos sempre são compartilhados."
+text:"Um novo mundo de amizades e descobertas."
 
 },
 
 {
 
-title:"Família",
+title:"Grandes Amigos",
 
-text:"A base que acompanha todas as conquistas."
+year:"2020",
+
+time:"15 min",
+
+img:"public/episodios/3.jpg",
+
+text:"Os melhores momentos são vividos ao lado das pessoas certas."
 
 },
 
 {
 
-title:"Futuro",
+title:"Aventuras",
 
-text:"Os melhores capítulos ainda estão por vir."
+year:"2023",
+
+time:"18 min",
+
+img:"public/episodios/4.jpg",
+
+text:"Cada viagem trouxe uma nova lembrança."
+
+},
+
+{
+
+title:"16 Anos",
+
+year:"2026",
+
+time:"Temporada Final",
+
+img:"public/episodios/5.jpg",
+
+text:"O melhor episódio da história até agora."
 
 }
 
@@ -767,71 +786,55 @@ function renderPhotoRow(){
 
 function buildAchievements(){
 
-    achRow.innerHTML=achievements.map((item,index)=>`
+    achRow.innerHTML = achievements.map((item,index)=>`
 
-        <div class="card ach">
+        <div class="episode-card">
 
-            <span class="ach-num">
+            <img
+                src="${item.img}"
+                alt="${item.title}">
 
-                ${String(index+1).padStart(2,"0")}
+            <div class="episode-info">
 
-            </span>
+                <span class="episode-tag">
 
-            <h3>
+                    EP. ${String(index+1).padStart(2,"0")}
 
-                ${item.title}
+                </span>
 
-            </h3>
+                <h3>
 
-            <p>
+                    ${item.title}
 
-                ${item.text}
+                </h3>
 
-            </p>
+                <div class="episode-meta">
+
+                    <span>${item.year}</span>
+
+                    <span>•</span>
+
+                    <span>${item.time}</span>
+
+                </div>
+
+                <p>
+
+                    ${item.text}
+
+                </p>
+
+                <button class="episode-btn">
+
+                    ▶ Assistir
+
+                </button>
+
+            </div>
 
         </div>
 
     `).join("");
-
-
-
-    achRow
-    .querySelectorAll(".card")
-    .forEach((card,index)=>{
-
-        card.animate(
-
-        [
-
-        {
-
-            opacity:0,
-
-            transform:"translateY(60px)"
-
-        },
-
-        {
-
-            opacity:1,
-
-            transform:"translateY(0)"
-
-        }
-
-        ],
-
-        {
-
-            duration:700,
-
-            delay:index*120,
-
-            fill:"forwards"
-
-        });
-
-    });
 
 }
 
