@@ -71,81 +71,55 @@ const photoTabs = [
 ];
 
 
-
 const achievements=[
 
 {
-
 title:"Primeiros Passos",
-
 year:"2010",
-
 time:"10 min",
-
+category:"Família",
 img:"public/episodios/1.jpg",
-
 text:"Toda grande história começa com um pequeno passo."
-
 },
 
 {
-
 title:"Primeiro Dia de Aula",
-
 year:"2015",
-
 time:"12 min",
-
+category:"Escola",
 img:"public/episodios/2.jpg",
-
 text:"Um novo mundo de amizades e descobertas."
-
 },
 
 {
-
 title:"Grandes Amigos",
-
 year:"2020",
-
 time:"15 min",
-
+category:"Amizades",
 img:"public/episodios/3.jpg",
-
 text:"Os melhores momentos são vividos ao lado das pessoas certas."
-
 },
 
 {
-
 title:"Aventuras",
-
 year:"2023",
-
 time:"18 min",
-
+category:"Viagens",
 img:"public/episodios/4.jpg",
-
 text:"Cada viagem trouxe uma nova lembrança."
-
 },
 
 {
-
 title:"16 Anos",
-
 year:"2026",
-
-time:"Temporada Final",
-
+time:"Especial",
+category:"Aniversário",
 img:"public/episodios/5.jpg",
-
 text:"O melhor episódio da história até agora."
 
 }
 
 ];
-
 
 
 //==========================================================
@@ -160,7 +134,6 @@ const countdown=document.getElementById("countdown");
 
 const countNumber=document.getElementById("countNumber");
 
-const countFill=document.getElementById("countFill");
 
 const reveal=document.getElementById("reveal");
 
@@ -238,6 +211,7 @@ let audioCtx=null;
 
 let touchStartX=0;
 
+let currentEpisode = 0;
 
 
 //==========================================================
@@ -379,54 +353,43 @@ function playTudum(){
 }
 
 
-
 //==========================================================
-// COUNTDOWN
+// START EXPERIENCE
 //==========================================================
 
-function runCountdown(){
+function startExperience(){
 
-    let value=5;
+    initAudio();
 
-    countNumber.textContent=value;
+    if(audioCtx && audioCtx.state === "suspended"){
 
-    countFill.style.width="0%";
+        audioCtx.resume();
 
-    playBeep();
+    }
 
-    const timer=setInterval(()=>{
+    if(bgMusic){
 
-        value--;
+        bgMusic.volume = .35;
+        bgMusic.currentTime = 0;
 
-        if(value<=0){
+        bgMusic.play().catch(()=>{});
 
-            clearInterval(timer);
+    }
 
-            countFill.style.width="100%";
+    startScreen.classList.add("hidden");
 
-            setTimeout(showReveal,500);
+    reveal.classList.remove("hidden");
 
-            return;
+    playTudum();
 
-        }
+    setTimeout(()=>{
 
-        countNumber.textContent=value;
+        showApp();
 
-        countFill.style.width=
-
-        ((5-value)/5)*100+"%";
-
-        playBeep(
-
-            value===1?850:500,
-
-            .15
-
-        );
-
-    },1000);
+    },2500);
 
 }
+
 
 
 
@@ -477,45 +440,6 @@ function showApp(){
 }
 
 
-
-//==========================================================
-// INICIAR EXPERIÊNCIA
-//==========================================================
-
-function startExperience(){
-
-    initAudio();
-
-    if(audioCtx.state==="suspended"){
-
-        audioCtx.resume();
-
-    }
-
-    if(bgMusic){
-
-        bgMusic.volume=.35;
-
-        bgMusic.currentTime=0;
-
-        bgMusic.play().catch(()=>{});
-
-    }
-
-    startScreen.classList.add("hidden");
-
-    reveal.classList.add("hidden");
-
-    app.classList.add("hidden");
-
-    countdown.classList.remove("hidden");
-
-    runCountdown();
-
-}
-
-
-
 //==========================================================
 // REPLAY
 //==========================================================
@@ -530,9 +454,7 @@ function replayExperience(){
 
     startScreen.classList.remove("hidden");
 
-    countFill.style.width="0%";
 
-    countNumber.textContent="5";
 
     window.scrollTo({
 
@@ -720,16 +642,25 @@ function renderPhotoRow(){
 
 
 
-        img.onload=()=>{
+        img.onload = () => {
 
-            if(img.naturalHeight>img.naturalWidth){
+    const ratio = img.naturalWidth / img.naturalHeight;
 
-                card.classList.add("vertical");
+    if (ratio < 0.85) {
 
-            }
+        card.classList.add("vertical");
 
-        };
+    } else if (ratio > 1.35) {
 
+        card.classList.add("horizontal");
+
+    } else {
+
+        card.classList.add("square");
+
+    }
+
+};
 
 
         card.onclick=()=>{
@@ -780,29 +711,44 @@ function renderPhotoRow(){
 
 
 
-//==========================================================
-// CONQUISTAS
-//==========================================================
-
 function buildAchievements(){
 
     achRow.innerHTML = achievements.map((item,index)=>`
 
-        <div class="episode-card">
+        <article class="episode-card" data-index="${index}">
 
-            <img
-                src="${item.img}"
-                alt="${item.title}">
+            <div class="episode-poster">
 
-            <div class="episode-info">
+                <img
+                    src="${item.img}"
+                    alt="${item.title}"
+                    loading="lazy">
 
-                <span class="episode-tag">
+                <div class="episode-gradient"></div>
+
+                <div class="episode-hover">
+
+                    <button
+                        class="episode-play"
+                        data-index="${index}">
+
+                        ▶ Assistir
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="episode-body">
+
+                <span class="episode-number">
 
                     EP. ${String(index+1).padStart(2,"0")}
 
                 </span>
 
-                <h3>
+                <h3 class="episode-title">
 
                     ${item.title}
 
@@ -818,23 +764,31 @@ function buildAchievements(){
 
                 </div>
 
-                <p>
+                <p class="episode-description">
 
                     ${item.text}
 
                 </p>
 
-                <button class="episode-btn">
-
-                    ▶ Assistir
-
-                </button>
-
             </div>
 
-        </div>
+        </article>
 
     `).join("");
+
+
+
+    document
+        .querySelectorAll(".episode-play")
+        .forEach(btn=>{
+
+            btn.addEventListener("click",()=>{
+
+                openEpisode(index);
+
+            });
+
+        });
 
 }
 
@@ -957,6 +911,105 @@ function initNavbar(){
 //==========================================================
 
 console.log("PARTE 3 OK");
+
+function openEpisode(index){
+
+    currentEpisode=index;
+
+    const ep=achievements[index];
+
+    modalImage.src=ep.img;
+
+    modalTitle.textContent=ep.title;
+
+    modalSubtitle.textContent=ep.text;
+
+    modalYear.textContent=ep.year;
+
+    if(detailCategory){
+
+        detailCategory.textContent=ep.category;
+
+    }
+
+    if(detailYear){
+
+        detailYear.textContent=ep.time;
+
+    }
+
+    photoModal.classList.remove("hidden");
+
+    requestAnimationFrame(()=>{
+
+        photoModal.classList.add("show");
+
+    });
+
+    document.body.style.overflow="hidden";
+
+}
+
+function nextEpisode(){
+
+    currentEpisode++;
+
+    if(currentEpisode>=achievements.length){
+
+        currentEpisode=0;
+
+    }function prevEpisode(){
+
+    currentEpisode--;
+
+    if(currentEpisode<0){
+
+        currentEpisode=achievements.length-1;
+
+    }
+
+    openEpisode(currentEpisode);
+
+}
+
+    openEpisode(currentEpisode);
+
+}
+
+const episodes = [
+
+{
+    title:"EP.01",
+    available:false,
+    cover:"public/episodios/coming-soon.jpg"
+},
+
+{
+    title:"EP.02",
+    available:false,
+    cover:"public/episodios/coming-soon.jpg"
+},
+
+{
+    title:"EP.03",
+    available:false,
+    cover:"public/episodios/coming-soon.jpg"
+},
+
+{
+    title:"EP.04",
+    available:false,
+    cover:"public/episodios/coming-soon.jpg"
+},
+
+{
+    title:"16 Anos",
+    available:true,
+    cover:"public/episodios/ep05/01.jpeg"
+}
+
+];
+
 
 //==========================================================
 // PARTE 4

@@ -1483,80 +1483,302 @@ justify-content:center;
 
 
 
-/*==========================================================
- CONQUISTAS
-==========================================================*/
+/*=========================================================
+EPISÓDIOS DA VIDA
+=========================================================*/
 
-.card.ach{
+#achRow{
 
-    width:290px;
+    display:grid;
 
-    aspect-ratio:3/4;
+    grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
 
-    padding:34px;
+    gap:35px;
 
-    background:
-
-        linear-gradient(
-
-            180deg,
-
-            #182541,
-
-            #0d1525
-
-        );
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:flex-end;
+    margin-top:40px;
 
 }
 
-.card.ach:hover{
+.episode-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:22px;
+
+    background:#0f1728;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.45s;
+
+    cursor:pointer;
+
+    box-shadow:
+
+        0 20px 50px rgba(0,0,0,.35);
+
+}
+
+.episode-card:hover{
 
     transform:
 
-        translateY(-10px)
+        translateY(-12px)
 
-        scale(1.04);
+        scale(1.03);
 
-}
+    border-color:#4AA8FF;
 
-.ach-num{
+    box-shadow:
 
-    font-family:"Cormorant Garamond";
+        0 35px 80px rgba(0,0,0,.55),
 
-    font-size:4rem;
-
-    color:#6fd7ff;
-
-    margin-bottom:auto;
+        0 0 30px rgba(74,168,255,.20);
 
 }
 
-.ach-title{
 
-    font-size:1.45rem;
+/*======================================
+POSTER
+======================================*/
 
-    margin-top:18px;
+.episode-poster{
 
-    margin-bottom:12px;
+    position:relative;
+
+    aspect-ratio:16/9;
+
+    overflow:hidden;
 
 }
 
-.ach-text{
+.episode-poster img{
 
-    color:#bcc8df;
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.6s;
+
+}
+
+.episode-card:hover img{
+
+    transform:scale(1.08);
+
+}
+
+
+/*======================================
+GRADIENTE
+======================================*/
+
+.episode-gradient{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    linear-gradient(
+
+        transparent 35%,
+
+        rgba(0,0,0,.92)
+
+    );
+
+}
+
+
+/*======================================
+BOTÃO PLAY
+======================================*/
+
+.episode-hover{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    opacity:0;
+
+    transition:.35s;
+
+    background:
+
+    rgba(0,0,0,.25);
+
+}
+
+.episode-card:hover .episode-hover{
+
+    opacity:1;
+
+}
+
+.episode-play{
+
+    width:170px;
+
+    height:52px;
+
+    border-radius:999px;
+
+    background:white;
+
+    color:#111;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    transition:.35s;
+
+}
+
+.episode-play:hover{
+
+    background:#4AA8FF;
+
+    color:white;
+
+}
+
+
+/*======================================
+INFORMAÇÕES
+======================================*/
+
+.episode-body{
+
+    padding:28px;
+
+}
+
+.episode-number{
+
+    color:#6FD7FF;
+
+    font-size:.9rem;
+
+    letter-spacing:2px;
+
+    font-weight:700;
+
+}
+
+.episode-title{
+
+    margin-top:12px;
+
+    font-size:2rem;
+
+    font-weight:700;
+
+}
+
+.episode-meta{
+
+    display:flex;
+
+    gap:12px;
+
+    margin:16px 0;
+
+    color:#AFC1D8;
+
+    font-size:.95rem;
+
+}
+
+.episode-description{
+
+    color:#D6DDEB;
 
     line-height:1.8;
 
 }
 
 
+/*======================================
+REFLEXO
+======================================*/
 
+.episode-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    linear-gradient(
+
+        115deg,
+
+        transparent,
+
+        rgba(255,255,255,.15),
+
+        transparent
+
+    );
+
+    transform:translateX(-130%);
+
+    transition:1s;
+
+    z-index:30;
+
+}
+
+.episode-card:hover::before{
+
+    transform:translateX(130%);
+
+}
+
+
+/*======================================
+BADGE
+======================================*/
+
+.episode-number::before{
+
+    content:"● ";
+
+    color:#4AA8FF;
+
+}
+
+
+/*======================================
+RESPONSIVO
+======================================*/
+
+@media(max-width:900px){
+
+    #achRow{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
 /*==========================================================
  MENSAGEM
 ==========================================================*/
@@ -1717,33 +1939,24 @@ font-size:2.3rem;
 /*==========================================================
  MODAL NETFLIX
 ==========================================================*/
-
 .photo-modal{
 
     position:fixed;
 
     inset:0;
 
-    display:flex;
+    overflow-y:auto;
 
-    justify-content:center;
+    overflow-x:hidden;
 
-    align-items:center;
+    display:block;
 
-    background:rgba(0,0,0,.82);
+    background:rgba(0,0,0,.92);
 
-    backdrop-filter:blur(18px);
+    z-index:9999;
 
-    z-index:99999;
-
-    opacity:0;
-
-    visibility:hidden;
-
-    transition:.35s;
 
 }
-
 .photo-modal.show{
 
     opacity:1;
@@ -1766,22 +1979,13 @@ font-size:2.3rem;
 
     width:min(1200px,92vw);
 
-    max-height:92vh;
+    margin:40px auto;
 
     background:#111827;
 
     border-radius:18px;
 
-    overflow:hidden;
-
-    box-shadow:
-
-    0 40px 120px rgba(0,0,0,.65),
-
-    0 0 50px rgba(95,209,255,.12);
-
-    animation:modalOpen .35s ease;
-
+    overflow:visible;
 }
 
 
@@ -1789,29 +1993,43 @@ font-size:2.3rem;
 /*==========================================================
  FOTO
 ==========================================================*/
-
 .photo-top{
 
-    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-    width:100%;
+    padding:30px;
 
-    height:80vh;
+    background:#000;
 
-    overflow:hidden;
-
+    max-height:75vh;
 }
-
 .modal-image{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
 
     display:block;
 
+    max-width:100%;
+    max-height:70vh;
+
+    width:auto;
+    height:auto;
+
+    object-fit:contain;
+
+    margin:auto;
+}
+.modal-content{
+
+    width:min(1100px,90vw);
+
+    margin:auto;
+
+    background:#111827;
+
+    border-radius:18px;
+
+    overflow:hidden;
 }
 
 .photo-gradient{
@@ -2509,16 +2727,19 @@ display:none;
  FOTO
 ==========================================================*/
 
-.modal-image{
 
-    transition:
+.modal-media{
 
-    transform .5s,
+    display:flex;
 
-    filter .5s;
+    justify-content:center;
 
+    align-items:center;
+
+    padding:40px;
+
+    background:#000;
 }
-
 .modal-image:hover{
 
     transform:scale(1.03);
