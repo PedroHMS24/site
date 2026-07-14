@@ -73,53 +73,55 @@ const photoTabs = [
 
 const achievements=[
 
+
 {
-title:"Primeiros Passos",
-year:"2010",
-time:"10 min",
-category:"Família",
-img:"public/episodios/1.jpg",
-text:"Toda grande história começa com um pequeno passo."
+    title:"EP.01",
+    year:"",
+    time:"",
+    category:"",
+    img:"public/episodios/coming-soon.png",
+    text:""
 },
 
 {
-title:"Primeiro Dia de Aula",
-year:"2015",
-time:"12 min",
-category:"Escola",
-img:"public/episodios/2.jpg",
-text:"Um novo mundo de amizades e descobertas."
+    title:"EP.02",
+    year:"",
+    time:"",
+    category:"",
+    img:"public/episodios/coming-soon.png",
+    text:""
 },
 
 {
-title:"Grandes Amigos",
-year:"2020",
-time:"15 min",
-category:"Amizades",
-img:"public/episodios/3.jpg",
-text:"Os melhores momentos são vividos ao lado das pessoas certas."
+    title:"EP.03",
+    year:"",
+    time:"",
+    category:"",
+    img:"public/episodios/coming-soon.png",
+    text:""
 },
 
 {
-title:"Aventuras",
-year:"2023",
-time:"18 min",
-category:"Viagens",
-img:"public/episodios/4.jpg",
-text:"Cada viagem trouxe uma nova lembrança."
+    title:"EP.04",
+    year:"",
+    time:"",
+    category:"",
+    img:"public/episodios/coming-soon.png",
+    text:""
 },
 
 {
-title:"16 Anos",
-year:"2026",
-time:"Especial",
-category:"Aniversário",
-img:"public/episodios/5.jpg",
-text:"O melhor episódio da história até agora."
-
+    title:"16 Anos",
+    year:"2026",
+    time:"Especial",
+    category:"Aniversário",
+    img:"public/episodios/ep05/01.jpeg",
+    text:"O melhor episódio até agora."
 }
 
 ];
+
+
 
 
 //==========================================================
@@ -211,7 +213,7 @@ let audioCtx=null;
 
 let touchStartX=0;
 
-let currentEpisode = 0;
+let currentepisode = 0;
 
 
 //==========================================================
@@ -886,7 +888,7 @@ function initNavbar(){
 
         "fotos",
 
-        "conquistas",
+        "episodios",
 
         "mensagem"
 
@@ -976,39 +978,8 @@ function nextEpisode(){
 
 }
 
-const episodes = [
 
-{
-    title:"EP.01",
-    available:false,
-    cover:"public/episodios/coming-soon.jpg"
-},
 
-{
-    title:"EP.02",
-    available:false,
-    cover:"public/episodios/coming-soon.jpg"
-},
-
-{
-    title:"EP.03",
-    available:false,
-    cover:"public/episodios/coming-soon.jpg"
-},
-
-{
-    title:"EP.04",
-    available:false,
-    cover:"public/episodios/coming-soon.jpg"
-},
-
-{
-    title:"16 Anos",
-    available:true,
-    cover:"public/episodios/ep05/01.jpeg"
-}
-
-];
 
 
 //==========================================================
