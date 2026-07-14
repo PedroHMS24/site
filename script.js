@@ -361,9 +361,29 @@ function playTudum(){
 
 function startExperience(){
 
+    initAudio();
+
+    if(audioCtx && audioCtx.state==="suspended"){
+        audioCtx.resume();
+    }
+
+    if(bgMusic){
+
+        bgMusic.pause();
+        bgMusic.currentTime = 0;
+        bgMusic.volume = 0.35;
+
+        bgMusic.play().catch(err=>{
+            console.log(err);
+        });
+
+    }
+
     startScreen.classList.add("hidden");
 
     reveal.classList.remove("hidden");
+
+    playTudum();
 
     setTimeout(showApp,2500);
 
