@@ -361,34 +361,54 @@ function playTudum(){
 
 function startExperience(){
 
-    initAudio();
+    console.log("1 - Entrou");
 
-    if(audioCtx && audioCtx.state === "suspended"){
+    try{
 
-        audioCtx.resume();
+        initAudio();
+        console.log("2 - initAudio OK");
+
+        if(audioCtx && audioCtx.state==="suspended"){
+            audioCtx.resume();
+        }
+
+        console.log("3 - áudio OK");
+
+        if(bgMusic){
+
+            bgMusic.volume=.35;
+            bgMusic.currentTime=0;
+
+            bgMusic.play().catch(err=>{
+                console.log("Erro ao tocar música:", err);
+            });
+
+        }
+
+        console.log("4 - música OK");
+
+        startScreen.classList.add("hidden");
+        console.log("5 - startScreen escondida");
+
+        reveal.classList.remove("hidden");
+        console.log("6 - reveal apareceu");
+
+        playTudum();
+        console.log("7 - tudum");
+
+        setTimeout(()=>{
+
+            console.log("8 - showApp");
+
+            showApp();
+
+        },2500);
+
+    }catch(err){
+
+        console.error("ERRO:", err);
 
     }
-
-    if(bgMusic){
-
-        bgMusic.volume = .35;
-        bgMusic.currentTime = 0;
-
-        bgMusic.play().catch(()=>{});
-
-    }
-
-    startScreen.classList.add("hidden");
-
-    reveal.classList.remove("hidden");
-
-    playTudum();
-
-    setTimeout(()=>{
-
-        showApp();
-
-    },2500);
 
 }
 
