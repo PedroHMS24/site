@@ -4027,3 +4027,21 @@ html{
     text-rendering:optimizeLegibility;
 
 }
+.start-screen{
+    z-index:999999;
+}
+
+.start-inner{
+    position:relative;
+    z-index:999999;
+}
+
+#startBtn{
+    position:relative;
+    z-index:999999;
+    pointer-events:auto;
+}
+
+.intro-glow{
+    pointer-events:none;
+}
