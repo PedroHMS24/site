@@ -1419,26 +1419,20 @@ function heroAnimation(){
 // CURSOR GLOW
 //==========================================================
 
-const cursor=document.createElement("div");
-
-cursor.className="cursorGlow";
-
+const cursor = document.createElement("div");
+cursor.className = "cursorGlow";
 document.body.appendChild(cursor);
 
-if(window.innerWidth > 768){
+if (window.innerWidth > 768) {
 
-    document.addEventListener("mousemove",(e)=>{
+    document.addEventListener("mousemove", (e) => {
 
-        // código atual
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
 
     });
 
 }
-
-    cursor.style.left=e.clientX+"px";
-
-    cursor.style.top=e.clientY+"px";
-;
 
 
 
