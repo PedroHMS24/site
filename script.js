@@ -80,7 +80,7 @@ const achievements=[
     year:"",
     time:"",
     category:"",
-    img:"public/episodios/coming-soon.png",
+    img:"public/    /coming-soon.png",
     text:""
 },
 
@@ -790,6 +790,49 @@ function buildAchievements(){
         });
 
 }
+
+
+
+function buildGallery(){
+
+    const gallery=document.getElementById("galleryGrid");
+
+    if(!gallery) return;
+
+    gallery.innerHTML="";
+
+    photoTabs.forEach((tab,tabIndex)=>{
+
+        tab.items.forEach((photo,index)=>{
+
+            const div=document.createElement("div");
+
+            div.className="gallery-item";
+
+            div.innerHTML=`
+                <img
+                    src="${photo.img}"
+                    alt="${photo.title}"
+                    loading="lazy">
+            `;
+
+            div.onclick=()=>{
+
+                currentTab=tabIndex;
+                currentPhoto=index;
+
+                openPhotoModal();
+
+            };
+
+            gallery.appendChild(div);
+
+        });
+
+    });
+
+}
+
 
 
 
@@ -1964,14 +2007,19 @@ function loadCurrentTab(){
 
 const oldBuildApp=buildApp;
 
-buildApp=function(){
+function buildApp(){
 
-    loadCurrentTab();
+    buildPhotoTabs();
 
-    oldBuildApp();
+    renderPhotoRow();
+
+    buildAchievements();
+
+    buildGallery();
+
+    initNavbar();
 
 }
-
 
 
 //==========================================================

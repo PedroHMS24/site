@@ -4045,3 +4045,80 @@ html{
 .intro-glow{
     pointer-events:none;
 }
+/*==========================================================
+GALERIA
+==========================================================*/
+
+.gallery-section{
+
+    padding:70px 4%;
+
+}
+
+.gallery-grid{
+
+    column-count:4;
+    column-gap:18px;
+
+}
+
+.gallery-item{
+
+    margin-bottom:18px;
+
+    break-inside:avoid;
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+    border-radius:14px;
+
+    transition:.35s;
+
+}
+
+.gallery-item:hover{
+
+    transform:scale(1.03);
+
+}
+
+.gallery-item img{
+
+    width:100%;
+
+    display:block;
+
+    border-radius:14px;
+
+}
+@media(max-width:1100px){
+
+.gallery-grid{
+
+column-count:3;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.gallery-grid{
+
+column-count:2;
+
+}
+
+}
+
+@media(max-width:500px){
+
+.gallery-grid{
+
+column-count:1;
+
+}
+
+}
