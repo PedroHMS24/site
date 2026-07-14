@@ -122,22 +122,8 @@ const achievements=[
 
 ];
 
-const galleryPhotos = [
 
-    "1.jpg",
-    "2.jpg",
-    "3.jpg",
-    "4.jpg",
-    "5.jpg",
-    "6.jpg"
 
-];
-
-galleryPhotos.forEach(photo=>{
-
-    img.src = `public/galeria/${photo}`;
-
-});
 
 //==========================================================
 // ELEMENTOS HTML
