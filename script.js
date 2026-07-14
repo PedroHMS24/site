@@ -1425,13 +1425,20 @@ cursor.className="cursorGlow";
 
 document.body.appendChild(cursor);
 
-document.addEventListener("mousemove",(e)=>{
+if(window.innerWidth > 768){
+
+    document.addEventListener("mousemove",(e)=>{
+
+        // código atual
+
+    });
+
+}
 
     cursor.style.left=e.clientX+"px";
 
     cursor.style.top=e.clientY+"px";
-
-});
+;
 
 
 
@@ -2120,7 +2127,19 @@ break;
 
 });
 
+document.addEventListener("touchend",function(e){
 
+    const now=Date.now();
+
+    if(now-this.lastTouch<=300){
+
+        e.preventDefault();
+
+    }
+
+    this.lastTouch=now;
+
+},{passive:false});
 
 //==========================================================
 // FADE DA MÚSICA
