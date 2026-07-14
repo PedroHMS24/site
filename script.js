@@ -795,44 +795,37 @@ function buildAchievements(){
 
 function buildGallery(){
 
-    const gallery=document.getElementById("galleryGrid");
+    const gallery = document.getElementById("galleryGrid");
 
     if(!gallery) return;
 
-    gallery.innerHTML="";
+    gallery.innerHTML = "";
 
-    photoTabs.forEach((tab,tabIndex)=>{
+    for(let i=1;i<=500;i++){
 
-        tab.items.forEach((photo,index)=>{
+        const card = document.createElement("div");
 
-            const div=document.createElement("div");
+        card.className = "gallery-item";
 
-            div.className="gallery-item";
+        const img = new Image();
 
-            div.innerHTML=`
-                <img
-                    src="${photo.img}"
-                    alt="${photo.title}"
-                    loading="lazy">
-            `;
+        img.loading = "lazy";
 
-            div.onclick=()=>{
+        img.src = `public/destaques/${i}.jpg`;
 
-                currentTab=tabIndex;
-                currentPhoto=index;
+        img.onerror = ()=>{
 
-                openPhotoModal();
+            card.remove();
 
-            };
+        };
 
-            gallery.appendChild(div);
+        card.appendChild(img);
 
-        });
+        gallery.appendChild(card);
 
-    });
+    }
 
 }
-
 
 
 
