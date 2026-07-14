@@ -1,4 +1,4 @@
-//==========================================================
+    //==========================================================
 // RENZO • 16 ANOS
 // SCRIPT.JS
 // PARTE 1
@@ -39,7 +39,7 @@ const photoTabs = [
         items:[
 
             { title:"Viagens", sub:"Novos Lugares", img:"public/aventura/1.jpg" },
-            { title:"Esporte", sub:"Tatame", img:"public/aventura/2.jpg" },
+            { title:"Jiu-Jitsu", sub:"Tatame", img:"public/aventura/2.jpg" },
             { title:"Praia", sub:"Verão", img:"public/aventura/3.jpg" },
             { title:"Eventos", sub:"Diversão", img:"public/aventura/4.jpg" },
             { title:"Natureza", sub:"Trilhas", img:"public/aventura/5.jpg" },
@@ -54,7 +54,6 @@ const photoTabs = [
         id:"familia",
 
         label:"Amigos & Família",
-
         items:[
 
             { title:"Família", sub:"Sempre Juntos", img:"public/amigos/1.jpg" },
