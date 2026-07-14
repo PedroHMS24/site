@@ -1391,26 +1391,6 @@ function heroAnimation(){
 
 
 
-//==========================================================
-// CURSOR GLOW
-//==========================================================
-
-const cursor = document.createElement("div");
-cursor.className = "cursorGlow";
-document.body.appendChild(cursor);
-
-if (window.innerWidth > 768) {
-
-    document.addEventListener("mousemove", (e) => {
-
-        cursor.style.left = e.clientX + "px";
-        cursor.style.top = e.clientY + "px";
-
-    });
-
-}
-
-
 
 //==========================================================
 // PARALLAX HERO
