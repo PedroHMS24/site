@@ -18,7 +18,7 @@ const photoTabs = [
         label: "Destaques",
 
         items: [
-            { title:"2018", sub:"10 anos", img:"public/destaques/8.jpg" },
+            { title:"2018", sub:"10 anos", img:"public/destaques/8.jpeg" },
             { title:"2019", sub:"10 anos", img:"public/destaques/7.jpg" },
             { title:"2020", sub:"10 anos", img:"public/destaques/1.jpg" },
             { title:"2021", sub:"11 anos", img:"public/destaques/2.jpg" },
